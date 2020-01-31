@@ -19,8 +19,7 @@ explore: olympics_120_years {
 
   join: national_olympic_committees {                         # Join 1
     type: left_outer
-    sql_on: ${olympics_120_years.noc} = ${national_olympic_committees.noc}
-            AND ${olympics_120_years.season} = "Summer";;
+    sql_on: ${olympics_120_years.noc} = ${national_olympic_committees.noc};;
     relationship: many_to_one
   }
 
