@@ -78,6 +78,7 @@ view: summer_games {
 
   dimension: olympiad_status {
     type: string
+    case_sensitive: no
     sql: ${TABLE}.Olympiad_Status ;;
   }
 

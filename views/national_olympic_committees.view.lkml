@@ -1,6 +1,12 @@
 view: national_olympic_committees {
   sql_table_name: Olympics.National_Olympic_Committees ;;
 
+  dimension: noc_id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.NOC_ID ;;
+  }
+
   dimension: iso_alpha_2 {
     type: string
     sql: ${TABLE}.ISO_Alpha_2 ;;
@@ -21,10 +27,6 @@ view: national_olympic_committees {
     sql: ${TABLE}.NOC ;;
   }
 
-  dimension: noc_id {
-    type: number
-    sql: ${TABLE}.NOC_ID ;;
-  }
 
   dimension: noc_region {
     type: string
