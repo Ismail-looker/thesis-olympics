@@ -85,7 +85,7 @@ view: athlete_events {
   }
 
   dimension: games {
-    description: "Olympic Title"
+    description: "YYYY Season"
     label: "Olympic Title"
     type: string
     sql: ${TABLE}.Games ;;
@@ -105,7 +105,7 @@ view: athlete_events {
   }
 
   dimension: city {
-    description: "Olympic City"
+    description: "Olympic Host City"
     label: "Olympic City"
     type: string
     sql: ${TABLE}.City ;;
@@ -158,13 +158,6 @@ view: athlete_events {
     tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80]
     style: integer # the default value, could be excluded
     sql: ${athlete_age} ;;
-  }
-
-  dimension: gold_medal {
-    description: "Medal - Gold, Silver, Bronze"
-    label: "Olympic Medal"
-    type: string
-    sql: ${TABLE}.Medal ;;
   }
 
   measure: count {
@@ -241,25 +234,31 @@ view: athlete_events {
     type: number
     sql: ${number_of_gold_medals}+${number_of_silver_medals}+${number_of_bronze_medals} ;;
     drill_fields: [my_drill_fields*]
+    # link: {
+    #   url: "{{link}}&f[athlete_events.medal]=-NULL"
+    #   }
+    html: <a href="{{link}}&f[athlete_events.medal]=-NULL" target="_blank">{{ value }}</a> ;;
   }
 
   parameter: medals_to_count {
+    description: "Use this parameter with \"Dynamic Medal Count\" measure"
     type: unquoted
     allowed_value: {
-      label: "Gold medals"
+      label: "No of Gold Medals"
       value: "gold"
     }
     allowed_value: {
-      label: "Silver Medals"
+      label: "No of Silver Medals"
       value: "silver"
     }
     allowed_value: {
-      label: "Bronze Medals"
+      label: "No of Bronze Medals"
       value: "bronze"
     }
   }
 
   measure: dynamic_medal_count {
+    description: "Use \"Medals to count\" parameter with \"Dynamic Medal Count\" measure"
     label_from_parameter: medals_to_count
     type: count
     # sql: ${TABLE}.{% parameter medals_to_count %} ;;
@@ -267,5 +266,8 @@ view: athlete_events {
       field: medal
       value: "{% parameter medals_to_count %}"
     }
+    drill_fields: [my_drill_fields*]
+    html: <a href="/explore/ismail_thesis_olympics/athlete_events?fields=athlete_events.my_drill_fields*&f[athlete_events.medal]={% parameter medals_to_count %}" target="_blank">{{ value }}</a> ;;
+
   }
 }

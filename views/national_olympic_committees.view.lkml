@@ -23,6 +23,7 @@ view: national_olympic_committees {
   dimension: iso_country {
     description: "ISO Country Name"
     label: "Country"
+    case_sensitive: no
     type: string
     sql:  CASE
             WHEN ${TABLE}.ISO_Country is null THEN ${TABLE}.NOC_Region
