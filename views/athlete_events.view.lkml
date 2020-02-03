@@ -1,6 +1,10 @@
 view: athlete_events {
   sql_table_name: Olympics.athlete_events ;;
 
+  set: my_drill_fields {
+    fields: [unique_id, athlete_id, athlete_name, noc, national_olympic_committees.iso_country, sport, olympic_event, medal]
+    }
+
   dimension: unique_id {
     description: "Unique ID"
     label: "_ID"
@@ -155,12 +159,14 @@ view: athlete_events {
     style: integer # the default value, could be excluded
     sql: ${athlete_age} ;;
   }
+
   dimension: gold_medal {
     description: "Medal - Gold, Silver, Bronze"
     label: "Olympic Medal"
     type: string
     sql: ${TABLE}.Medal ;;
   }
+
   measure: count {
     type: count
     drill_fields: [athlete_name]
@@ -171,29 +177,31 @@ view: athlete_events {
     description: "Number of Athletes"
     type: count_distinct
     sql: ${athlete_name};;
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
   }
 
   measure: number_of_distinct_avents{
     description: "Number of Events"
     type: count_distinct
     sql: ${olympic_event};;
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
   }
 
   measure: number_of_distinct_NOCs{
     description: "Number of NOCs"
     type: count_distinct
     sql: ${noc};;
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
   }
 
   measure: number_of_distinct_sports{
     description: "Number of Sports"
     type: count_distinct
     sql: ${sport};;
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
   }
+
+# Medals-------------------------------------------------
   measure: number_of_gold_medals{
     description: "Number of Medals (Gold)"
     label: "Number of Medals (Gold)"
@@ -202,8 +210,9 @@ view: athlete_events {
       field: medal
       value: "gold"
     }
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
   }
+
   measure: number_of_silver_medals{
     description: "Number of Medals (Silver)"
     label: "Number of Medals (Silver)"
@@ -212,8 +221,9 @@ view: athlete_events {
       field: medal
       value: "silver"
     }
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
   }
+
   measure: number_of_bronze_medals{
     description: "Number of Medals (Bronze)"
     label: "Number of Medals (Bronze)"
@@ -222,6 +232,7 @@ view: athlete_events {
       field: medal
       value: "bronze"
     }
+    drill_fields: [my_drill_fields*]
   }
 
   measure: number_of_medals{
@@ -229,6 +240,32 @@ view: athlete_events {
     label: "Number of Medals (Total)"
     type: number
     sql: ${number_of_gold_medals}+${number_of_silver_medals}+${number_of_bronze_medals} ;;
-    drill_fields: [unique_id, athlete_name]
+    drill_fields: [my_drill_fields*]
+  }
+
+  parameter: medals_to_count {
+    type: unquoted
+    allowed_value: {
+      label: "Gold medals"
+      value: "gold"
+    }
+    allowed_value: {
+      label: "Silver Medals"
+      value: "silver"
+    }
+    allowed_value: {
+      label: "Bronze Medals"
+      value: "bronze"
+    }
+  }
+
+  measure: dynamic_medal_count {
+    label_from_parameter: medals_to_count
+    type: count
+    # sql: ${TABLE}.{% parameter medals_to_count %} ;;
+    filters: {
+      field: medal
+      value: "{% parameter medals_to_count %}"
+    }
   }
 }
