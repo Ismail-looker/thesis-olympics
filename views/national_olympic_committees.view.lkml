@@ -19,7 +19,10 @@ view: national_olympic_committees {
 
   dimension: iso_country {
     type: string
-    sql: ${TABLE}.ISO_Country ;;
+    sql:  CASE
+            WHEN ${TABLE}.ISO_Country is null THEN ${TABLE}.NOC_Region
+            ELSE ${TABLE}.ISO_Country
+          END;;
   }
 
   dimension: noc {

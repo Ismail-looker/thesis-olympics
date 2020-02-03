@@ -34,7 +34,7 @@ view: athlete_events {
       }
       when: {
         sql: ${TABLE}.Athlete_Gender = 'F' ;;
-        label: "complete"
+        label: "Female"
       }
       else: "Other"
     }
@@ -155,21 +155,26 @@ view: athlete_events {
     style: integer # the default value, could be excluded
     sql: ${athlete_age} ;;
   }
-
+  dimension: gold_medal {
+    description: "Medal - Gold, Silver, Bronze"
+    label: "Olympic Medal"
+    type: string
+    sql: ${TABLE}.Medal ;;
+  }
   measure: count {
     type: count
     drill_fields: [athlete_name]
   }
 
 #   New Measures   -----------------------------------------------------------
-  measure: number_of_distinct_Athletes{
+  measure: number_of_distinct_athletes{
     description: "Number of Athletes"
     type: count_distinct
     sql: ${athlete_name};;
     drill_fields: [unique_id, athlete_name]
   }
 
-  measure: number_of_distinct_Events{
+  measure: number_of_distinct_avents{
     description: "Number of Events"
     type: count_distinct
     sql: ${olympic_event};;
@@ -183,11 +188,47 @@ view: athlete_events {
     drill_fields: [unique_id, athlete_name]
   }
 
-  measure: number_of_distinct_Sports{
+  measure: number_of_distinct_sports{
     description: "Number of Sports"
     type: count_distinct
     sql: ${sport};;
     drill_fields: [unique_id, athlete_name]
   }
+  measure: number_of_gold_medals{
+    description: "Number of Medals (Gold)"
+    label: "Number of Medals (Gold)"
+    type: count
+    filters: {
+      field: medal
+      value: "gold"
+    }
+    drill_fields: [unique_id, athlete_name]
+  }
+  measure: number_of_silver_medals{
+    description: "Number of Medals (Silver)"
+    label: "Number of Medals (Silver)"
+    type: count
+    filters: {
+      field: medal
+      value: "silver"
+    }
+    drill_fields: [unique_id, athlete_name]
+  }
+  measure: number_of_bronze_medals{
+    description: "Number of Medals (Bronze)"
+    label: "Number of Medals (Bronze)"
+    type: count
+    filters: {
+      field: medal
+      value: "bronze"
+    }
+  }
 
+  measure: number_of_medals{
+    description: "Number of Medals (Total)"
+    label: "Number of Medals (Total)"
+    type: number
+    sql: ${number_of_gold_medals}+${number_of_silver_medals}+${number_of_bronze_medals} ;;
+    drill_fields: [unique_id, athlete_name]
+  }
 }

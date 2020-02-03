@@ -87,6 +87,14 @@ view: summer_games {
     sql: ${TABLE}.Olympiad_Year ;;
   }
 
+  dimension_group: olympiad_duration_in_days{
+    type: duration
+    intervals: [day, week, month]
+    sql_start: ${TABLE}.Olympiad_StartDate ;;
+    sql_end: ${TABLE}.Olympiad_EndDate ;;
+
+  }
+
   measure: count {
     type: count
     drill_fields: []
