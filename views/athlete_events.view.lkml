@@ -173,7 +173,7 @@ view: athlete_events {
     drill_fields: [my_drill_fields*]
   }
 
-  measure: number_of_distinct_avents{
+  measure: number_of_distinct_events{
     description: "Number of Events"
     type: count_distinct
     sql: ${olympic_event};;
