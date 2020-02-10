@@ -225,6 +225,14 @@ view: athlete_events {
       field: medal
       value: "bronze"
     }
+    link: {
+      label: "bronze"
+      # url: "{{link}"
+      icon_url: "https://storage.googleapis.com/120-years-olympics/pics/bronze.png"
+      }
+#   <img src="https://storage.googleapis.com/120-years-olympics/pics/bronze.png">
+#   <img src="https://storage.googleapis.com/120-years-olympics/pics/silver.png">
+#   <img src="https://storage.googleapis.com/120-years-olympics/pics/gold.png">
     drill_fields: [my_drill_fields*]
   }
 

@@ -38,6 +38,18 @@ persist_with: ismail_thesis_olympics_default_datagroup
 #
 # }
 
+map_layer: modern_olympics_layer {
+  # feature_key: "Name"
+  label: "Host City"
+  file: "modern_olympics.topojson"
+  # min_zoom_level: 1.6
+  # property_key: "Name"
+  # max_zoom_level: 12
+  # format: topojson
+  # projection: airy
+  property_label_key: "Name"
+}
+
 explore: athlete_events {
   label: "Athlete Olympic Events (120 Years)"
   view_label: "Athlete Olympic Events"

@@ -41,6 +41,9 @@ view: summer_games {
       label: "{{ olympiad_host_city._value }}"
       url: "{{olympiad_city_wiki_link}}"
     }
+    map_layer_name: modern_olympics_layer {
+      label: "Host City"
+    }
   }
 
   dimension: olympiad_host_country {
@@ -48,12 +51,18 @@ view: summer_games {
     label: "Host Country"
     type: string
     sql: ${TABLE}.Olympiad_HostCountry ;;
+    map_layer_name: countries {
+      label: "Host Nation"
+    }
   }
 
   dimension: olympiad_host_country_code {
     description: "Host Country Code"
     type: string
     sql: ${TABLE}.Olympiad_HostCountryCode ;;
+    map_layer_name: countries {
+      label: "Host Nation Code"
+    }
   }
 
   dimension: olympiad_is_celebrated {
@@ -97,6 +106,44 @@ view: summer_games {
     sql: ${TABLE}.Olympiad_StartDate ;;
   }
 
+  dimension: olympiad_status {
+    description: "Celebrated or Not"
+    type: string
+    case_sensitive: no
+    sql: ${TABLE}.Olympiad_Status ;;
+  }
+
+  dimension: olympiad_year {
+    description: "Olympic Year (YYYY)"
+    type: number
+    value_format: "####"
+    sql: ${TABLE}.Olympiad_Year ;;
+  }
+
+  dimension_group: olympiad_duration {
+    description: "How long was the Olympics?"
+    label: "
+    {% if days_olympiad_duration._in_query %} Olympiad Duration in Days
+    {% elsif weeks_olympiad_duration._in_query %}  Olympiad Duration in Weeks
+    {% else %}  Olympiad Duration
+    {% endif %}"
+    # label: "Olympiad Duration"
+    type: duration
+    datatype: date
+    intervals: [day, week]
+    sql_start: ${TABLE}.Olympiad_StartDate ;;
+    sql_end: ${TABLE}.Olympiad_EndDate ;;
+
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [olympiad_id]
+  }
+
+
+
+# TEST ---------------------------------------------------------------
   dimension_group: today {
     type: time
     sql: CURRENT_TIMESTAMP() ;;
@@ -158,7 +205,7 @@ view: summer_games {
 #             ELSE NULL
 #           END;;
 
-  }
+    }
 
 #   dimension: dashboard_purchase_date {
 #     sql: {% if {{include_last_month._parameter_value}} == 'this' %}
@@ -228,39 +275,6 @@ view: summer_games {
 #     full_suggestions: yes
 #     suggest_dimension: summer_games.olympiad_start
 #   }
+# TEST ---------------------------------------------------------------
 
-  dimension: olympiad_status {
-    description: "Celebrated or Not"
-    type: string
-    case_sensitive: no
-    sql: ${TABLE}.Olympiad_Status ;;
-  }
-
-  dimension: olympiad_year {
-    description: "Olympic Year (YYYY)"
-    type: number
-    value_format: "####"
-    sql: ${TABLE}.Olympiad_Year ;;
-  }
-
-  dimension_group: olympiad_duration {
-    description: "How long was the Olympics?"
-    label: "
-    {% if days_olympiad_duration._in_query %} Olympiad Duration in Days
-    {% elsif weeks_olympiad_duration._in_query %}  Olympiad Duration in Weeks
-    {% else %}  Olympiad Duration
-    {% endif %}"
-    # label: "Olympiad Duration"
-    type: duration
-    datatype: date
-    intervals: [day, week]
-    sql_start: ${TABLE}.Olympiad_StartDate ;;
-    sql_end: ${TABLE}.Olympiad_EndDate ;;
-
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [olympiad_id]
-  }
 }
