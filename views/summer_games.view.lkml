@@ -29,6 +29,13 @@ view: summer_games {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.Olympiad_EndDate ;;
+    html:
+      {% if olympiad_end_date._in_query %}
+        {{linked_value}} | date: format: 'abbreviated_date'
+#       {% else %}
+#         event
+      {% endif %}
+    ;;
   }
 
   dimension: olympiad_host_city {

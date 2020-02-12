@@ -13,17 +13,6 @@ view: national_olympic_committees {
     label: "2-letter ISO Country code"
     type: string
     sql: ${TABLE}.ISO_Alpha_2 ;;
-    map_layer_name: countries {
-      # feature_key: "ISO_A3"
-      # file: "/map_folder/regions.topojson"
-      # format: topojson
-      label: "{{iso_country}}"
-      # max_zoom_level: 12
-      # min_zoom_level: 1.6
-      # projection: airy
-      # property_key: "ISO_A3"
-      # property_label_key: "NAME"
-    }
   }
 
   dimension: iso_alpha_3 {
@@ -31,9 +20,6 @@ view: national_olympic_committees {
     label: "3-letter ISO Country code"
     type: string
     sql: ${TABLE}.ISO_Alpha_3 ;;
-    map_layer_name: countries {
-      label: "Country ISO-3"
-    }
   }
 
   dimension: iso_country {
@@ -48,11 +34,17 @@ view: national_olympic_committees {
     map_layer_name: countries {
       label: "Country"
     }
+    link: {
+      icon_url: "https://lipis.github.io/flag-icon-css/flags/4x3/{{ iso_alpha_2._value | downcase }}.svg"
+      label: "{{ iso_country._value }}"
+      url: "https://en.wikipedia.org/wiki/{{ value | encode_uri }}"
+      # <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/aw.svg" alt="Aruba Flag">
+    }
   }
 
   dimension: noc {
     description: "National Olympic Committee Code"
-    label: "Country Code"
+    label: "NOC Country Code"
     type: string
     sql: ${TABLE}.NOC ;;
   }
@@ -71,8 +63,32 @@ view: national_olympic_committees {
     sql: ${TABLE}.NOC_Status ;;
   }
 
+  dimension: flag {
+    description: "Country Flag"
+    type: string
+    sql:   CASE
+            WHEN ${TABLE}.ISO_Country is null THEN ${TABLE}.NOC_Region
+            ELSE ${TABLE}.ISO_Country
+          END;;
+    # html: <img src="https://lipis.github.io/flag-icon-css/flags/4x3/{{ iso_alpha_2._value | downcase }}.svg" height= "32" /> ;;
+    # html: {% assign flag_url = 'https://lipis.github.io/flag-icon-css/flags/4x3/' %}
+    #       <img  src="{{ flag_url | append: iso_alpha_2._value | downcase | append: '.svg' }}"
+    #             height= "32"
+    #       />
+    # ;;
+      html: {%  if iso_alpha_2._value == "SU" or iso_alpha_2._value == "YU" or iso_alpha_2._value == "DD" %}
+              {{iso_country}}
+            {% elsif iso_alpha_2._value != null %}
+              <img  src= @{flag_url_prefix}{{ iso_alpha_2._value | downcase | append: ".svg" }} height= "32"/>
+            {% else %}
+              {{iso_country}}
+            {% endif %}
+    ;;
+    }
+
   measure: count {
     type: count
     drill_fields: []
   }
+
 }

@@ -8,8 +8,8 @@ Part 1:
 
 - [x] Choose Dataset - 120 Years Olympics
 - [x] Ask Questions of Dataset
-    - Q1 -
-    - Q2 -
+    - Q1 - Are veteran host nations better performers at the olympics?
+    - Q2 - Has gender equality improved over the years?
     - Q3 -
 - [x] Choose "angle" for dataset - What does the olympic performance look like for nations who have hosted the Olympics at least once.
 - [x] Write Thesis Proposal
