@@ -76,14 +76,16 @@ view: national_olympic_committees {
     #             height= "32"
     #       />
     # ;;
-      html: {%  if iso_alpha_2._value == "SU" or iso_alpha_2._value == "YU" or iso_alpha_2._value == "DD" %}
-              {{iso_country}}
-            {% elsif iso_alpha_2._value != null %}
-              <img  src= @{flag_url_prefix}{{ iso_alpha_2._value | downcase | append: ".svg" }} height= "32"/>
-            {% else %}
-              {{iso_country}}
-            {% endif %}
+    html: {%  if iso_alpha_2._value == "SU" or iso_alpha_2._value == "YU" or iso_alpha_2._value == "DD" %}
+            {{linked_value}}
+          {% elsif iso_alpha_2._value != null %}
+            {% assign flag_url_prefix = "https://lipis.github.io/flag-icon-css/flags/4x3/" %}
+            <a href={{link}}><img src= {{flag_url_prefix}}{{ iso_alpha_2._value | downcase | append: ".svg" }} height= "32"/></a>
+          {% else %}
+            {{linked_value}}
+          {% endif %}
     ;;
+    drill_fields: []
     }
 
   measure: count {

@@ -10,46 +10,6 @@ datagroup: ismail_thesis_olympics_default_datagroup {
 
 persist_with: ismail_thesis_olympics_default_datagroup
 
-# explore: olympics_120_years {
-#   label: "120 Years of Olympics"
-#   view_label: "Athlete Olympic Events"
-#   case_sensitive: no
-#
-#   join: national_olympic_committees {                         # Join 1
-#     type: left_outer
-#     sql_on: ${olympics_120_years.noc} = ${national_olympic_committees.noc};;
-#     relationship: many_to_one
-# #     fields: [
-# #       national_olympic_committees.created_date,
-# #       national_olympic_committees.full_name,
-# #       national_olympic_committees.email,
-# #       national_olympic_committees.age,
-# #       national_olympic_committees.gender,
-# #       usenational_olympic_committeesrs.state_on_map
-# #     ]
-#   }
-#
-#   join: summer_games {                                        # Join 2
-#     type: left_outer
-#     sql_on: ${olympics_120_years.year_year} = ${summer_games.olympiad_year}
-#       AND ${olympics_120_years.season} = "Summer";;
-#     relationship: many_to_one
-#   }
-#
-# }
-
-map_layer: modern_olympics_layer {
-  # feature_key: "Name"
-  label: "Host City"
-  file: "modern_olympics.topojson"
-  # min_zoom_level: 1.6
-  # property_key: "Name"
-  # max_zoom_level: 12
-  # format: topojson
-  # projection: airy
-  property_label_key: "Name"
-}
-
 explore: athlete_events {
   label: "Athlete Olympic Events (120 Years)"
   view_label: "Athlete Olympic Events"
@@ -78,10 +38,37 @@ explore: athlete_events {
 
 }
 
-# explore: national_olympic_committees {}
-
 explore: summer_games {
   label: "Olympic Summer Games"
-#   sql_always_where: ${summer_games.dashboard_olympiad_start_date} IS NOT NULL ;;
 
+  join: athlete_events {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${summer_games.olympiad_year} = ${athlete_events.olympic_year}
+          --AND ${athlete_events.olympic_season} = "Summer"
+          ;;
+  }
+
+  join: national_olympic_committees {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${athlete_events.noc} = ${national_olympic_committees.noc};;
+  }
+}
+
+# explore: national_olympic_committees {}
+
+#------------------------------------------- TESTING AREA----------------------------------
+# explore: testing_precision_filter_dt {}
+
+map_layer: modern_olympics_layer {
+  # feature_key: "Name"
+  label: "Host City"
+  file: "modern_olympics.topojson"
+  # min_zoom_level: 1.6
+  # property_key: "Name"
+  # max_zoom_level: 12
+  # format: topojson
+  # projection: airy
+  property_label_key: "Name"
 }
