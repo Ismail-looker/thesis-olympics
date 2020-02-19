@@ -14,10 +14,11 @@ view: testing_precision_filter_dt {
   dimension: id {
     sql: ${TABLE}.id;;
   }
-#   dimension: order_date {
-#     type:date
-#     convert_tz: no
-#   }
+
+  dimension: order_date {
+    type:date
+    convert_tz: no
+  }
 
   dimension: in_days {
     type: number
@@ -26,9 +27,8 @@ view: testing_precision_filter_dt {
   }
 
 
-  measure: count_d {
+  measure: count {
     type: count
 #     sql: ${id} ;;
   }
-
 }

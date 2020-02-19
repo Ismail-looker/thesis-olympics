@@ -197,7 +197,7 @@ view: athlete_events {
 # Medals-------------------------------------------------
   measure: number_of_gold_medals{
     description: "Number of Medals (Gold)"
-    label: "Number of Medals (Gold)"
+    label: "Gold Medal(s)"
     type: count
     filters: {
       field: medal
@@ -208,7 +208,7 @@ view: athlete_events {
 
   measure: number_of_silver_medals{
     description: "Number of Medals (Silver)"
-    label: "Number of Medals (Silver)"
+    label: "Silver Medal(s)"
     type: count
     filters: {
       field: medal
@@ -219,7 +219,7 @@ view: athlete_events {
 
   measure: number_of_bronze_medals{
     description: "Number of Medals (Bronze)"
-    label: "Number of Medals (Bronze)"
+    label: "Bronze Medal(s)"
     type: count
     filters: {
       field: medal
@@ -227,7 +227,7 @@ view: athlete_events {
     }
     link: {
       label: "bronze"
-      # url: "{{link}"
+      url: "{{link}}"
       icon_url: "https://storage.googleapis.com/120-years-olympics/pics/bronze.png"
       }
 #   <img src="https://storage.googleapis.com/120-years-olympics/pics/bronze.png">
@@ -238,7 +238,7 @@ view: athlete_events {
 
   measure: number_of_medals{
     description: "Number of Medals (Total)"
-    label: "Number of Medals (Total)"
+    label: "Total Medal(s)"
     type: number
     sql: ${number_of_gold_medals}+${number_of_silver_medals}+${number_of_bronze_medals} ;;
     drill_fields: [my_drill_fields*]

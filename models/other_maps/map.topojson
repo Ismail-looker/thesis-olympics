@@ -1,0 +1,180 @@
+{
+  "type": "Topology",
+  "objects": {
+    "collection": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Polygon",
+          "properties": {
+            "stroke": "#555555",
+            "stroke-width": 2,
+            "stroke-opacity": 1,
+            "fill": "#555555",
+            "fill-opacity": 0.5,
+            "Body": "Head"
+          },
+          "arcs": [
+            [
+              0
+            ]
+          ]
+        },
+        {
+          "type": "Polygon",
+          "properties": {
+            "stroke": "#555555",
+            "stroke-width": 2,
+            "stroke-opacity": 1,
+            "fill": "#555555",
+            "fill-opacity": 0.5,
+            "Body": "Chest"
+          },
+          "arcs": [
+            [
+              1
+            ]
+          ]
+        },
+        {
+          "type": "Polygon",
+          "properties": {
+            "stroke": "#555555",
+            "stroke-width": 2,
+            "stroke-opacity": 1,
+            "fill": "#555555",
+            "fill-opacity": 0.5,
+            "Body": "left_leg"
+          },
+          "arcs": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "type": "Polygon",
+          "properties": {
+            "stroke": "#555555",
+            "stroke-width": 2,
+            "stroke-opacity": 1,
+            "fill": "#555555",
+            "fill-opacity": 0.5,
+            "Body": ""
+          },
+          "arcs": [
+            [
+              3
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "arcs": [
+    [
+      [
+        0,
+        8273
+      ],
+      [
+        9999,
+        0
+      ],
+      [
+        0,
+        1726
+      ],
+      [
+        -9999,
+        0
+      ],
+      [
+        0,
+        -1726
+      ]
+    ],
+    [
+      [
+        235,
+        4676
+      ],
+      [
+        9764,
+        0
+      ],
+      [
+        0,
+        3198
+      ],
+      [
+        -9764,
+        0
+      ],
+      [
+        0,
+        -3198
+      ]
+    ],
+    [
+      [
+        706,
+        0
+      ],
+      [
+        2823,
+        0
+      ],
+      [
+        0,
+        4192
+      ],
+      [
+        -2823,
+        0
+      ],
+      [
+        0,
+        -4192
+      ]
+    ],
+    [
+      [
+        5764,
+        89
+      ],
+      [
+        3059,
+        0
+      ],
+      [
+        0,
+        4068
+      ],
+      [
+        -3059,
+        0
+      ],
+      [
+        0,
+        -4068
+      ]
+    ]
+  ],
+  "transform": {
+    "scale": [
+      0.0014942900540054005,
+      0.002937981935452025
+    ],
+    "translate": [
+      84.375,
+      41.64007838467894
+    ]
+  },
+  "bbox": [
+    84.375,
+    41.64007838467894,
+    99.31640625,
+    71.01695975726373
+  ]
+}

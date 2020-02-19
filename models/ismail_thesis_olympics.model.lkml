@@ -2,6 +2,7 @@ connection: "ismail_120_yrs_of_olympics_thesis"
 
 # include all the views
 include: "/views/**/*.view"
+# include: "/other_maps/**/*.dashboard"
 
 datagroup: ismail_thesis_olympics_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -60,15 +61,28 @@ explore: summer_games {
 
 #------------------------------------------- TESTING AREA----------------------------------
 # explore: testing_precision_filter_dt {}
+explore: body_map_dt {}
 
 map_layer: modern_olympics_layer {
   # feature_key: "Name"
   label: "Host City"
-  file: "modern_olympics.topojson"
+  file: "other_maps/modern_olympics.topojson"
   # min_zoom_level: 1.6
   # property_key: "Name"
   # max_zoom_level: 12
   # format: topojson
   # projection: airy
   property_label_key: "Name"
+}
+
+map_layer: body_map {
+  # feature_key: "Name"
+  label: "Body"
+  file: "full_body.json"
+  # min_zoom_level: 1.6
+  property_key: "Body"
+  # max_zoom_level: 12
+  # format: topojson
+  # projection: airy
+  property_label_key: "Body"
 }

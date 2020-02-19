@@ -127,6 +127,12 @@ view: summer_games {
     sql: ${TABLE}.Olympiad_Year ;;
   }
 
+  dimension: olympiad_year_str {
+    description: "Olympic Year (YYYY)"
+    type: string
+    sql: ${TABLE}.Olympiad_Year ;;
+  }
+
   dimension_group: olympiad_duration {
     description: "How long was the Olympics?"
     label: "
