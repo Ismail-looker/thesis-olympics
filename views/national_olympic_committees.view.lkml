@@ -63,6 +63,7 @@ view: national_olympic_committees {
     sql: ${TABLE}.NOC_Status ;;
   }
 
+# Flag
   dimension: flag {
     description: "Country Flag"
     type: string
@@ -70,14 +71,8 @@ view: national_olympic_committees {
             WHEN ${TABLE}.ISO_Country is null THEN ${TABLE}.NOC_Region
             ELSE ${TABLE}.ISO_Country
           END;;
-    # html: <img src="https://lipis.github.io/flag-icon-css/flags/4x3/{{ iso_alpha_2._value | downcase }}.svg" height= "32" /> ;;
-    # html: {% assign flag_url = 'https://lipis.github.io/flag-icon-css/flags/4x3/' %}
-    #       <img  src="{{ flag_url | append: iso_alpha_2._value | downcase | append: '.svg' }}"
-    #             height= "32"
-    #       />
-    # ;;
-    html: {%  if iso_alpha_2._value == "SU" or iso_alpha_2._value == "YU" or iso_alpha_2._value == "DD" %}
-            {{linked_value}}
+      html: {%  if iso_alpha_2._value == "SU" or iso_alpha_2._value == "YU" or iso_alpha_2._value == "DD" or  iso_alpha_2._value == nil %}
+            <a href={{link}}><img src="https://via.placeholder.com/200x150.jpg?text={{rendered_value}}" height= "32"></a>
           {% elsif iso_alpha_2._value != null %}
             {% assign flag_url_prefix = "https://lipis.github.io/flag-icon-css/flags/4x3/" %}
             <a href={{link}}><img src= {{flag_url_prefix}}{{ iso_alpha_2._value | downcase | append: ".svg" }} height= "32"/></a>
@@ -85,12 +80,18 @@ view: national_olympic_committees {
             {{linked_value}}
           {% endif %}
     ;;
-    drill_fields: []
+      drill_fields: []
+    # html: <img src="https://lipis.github.io/flag-icon-css/flags/4x3/{{ iso_alpha_2._value | downcase }}.svg" height= "32" /> ;;
+    # html: {% assign flag_url = 'https://lipis.github.io/flag-icon-css/flags/4x3/' %}
+    #       <img  src="{{ flag_url | append: iso_alpha_2._value | downcase | append: '.svg' }}"
+    #             height= "32"
+    #       />
+    # ;;
     }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+    measure: count {
+      type: count
+      drill_fields: []
+    }
 
-}
+  }

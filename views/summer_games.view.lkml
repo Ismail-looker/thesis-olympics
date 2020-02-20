@@ -8,36 +8,7 @@ view: summer_games {
     sql: ${TABLE}.Olympiad_ID ;;
   }
 
-  dimension: olympiad_city_wiki_link {
-    description: "Link to Host City Wikipage"
-    type: string
-    sql: ${TABLE}.Olympiad_CityWikiLink ;;
-    hidden: yes
-  }
-
-  dimension_group: olympiad_end {
-    description: "Olympic End Date"
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.Olympiad_EndDate ;;
-    html:
-      {% if olympiad_end_date._in_query %}
-        {{linked_value}} | date: format: 'abbreviated_date'
-#       {% else %}
-#         event
-      {% endif %}
-    ;;
-  }
-
+# Host City
   dimension: olympiad_host_city {
     description: "Host City"
     label: "Host City"
@@ -46,13 +17,14 @@ view: summer_games {
     link: {
       icon_url: "https://en.wikipedia.org/static/favicon/wikipedia.ico"
       label: "{{ olympiad_host_city._value }}"
-      url: "{{olympiad_city_wiki_link}}"
+      url: "{{ olympiad_city_wiki_link }}"
     }
     map_layer_name: modern_olympics_layer {
       label: "Host City"
     }
   }
 
+# Host Country
   dimension: olympiad_host_country {
     description: "Host Country"
     label: "Host Country"
@@ -113,12 +85,58 @@ view: summer_games {
     sql: ${TABLE}.Olympiad_StartDate ;;
   }
 
+# Olympic End Date
+  dimension_group: olympiad_end {
+    description: "Olympic End Date"
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.Olympiad_EndDate ;;
+    html: {{linked_value}} | date: format: 'abbreviated_date'
+      ;;
+#       {% if olympiad_end_date._in_query %}
+#         {{linked_value}} | date: format: 'abbreviated_date'
+#       {% else %}
+#         event
+#       {% endif %}
+    }
+
   dimension: olympiad_status {
     description: "Celebrated or Not"
     type: string
     case_sensitive: no
     sql: ${TABLE}.Olympiad_Status ;;
   }
+
+  dimension: olympiad_logo {
+    description: "Olympiad Logo"
+    type: string
+    sql: ${TABLE}.Olympiad_Year ;;
+    html:
+    {%  if olympiad_year._value == nil %}
+      <a href={{link}}><img src="https://via.placeholder.com/280x280.jpg?text={{rendered_value}}" height= "32"></a>
+    {% elsif olympiad_year._value != null %}
+      {% assign original_size = "280x280" | append: "/" %}
+      {% assign final_size = "140:140" %}
+      {% assign logo_url_prefix = "https://stillimg.olympic.org/games/" | append: original_size %}
+        <a href={{link}}><img src= "{{logo_url_prefix}}{{rendered_value}}_1.png?interpolation=lanczos-none&resize={{final_size}}"/></a>
+    {% else %}
+      {{linked_value}}
+    {% endif %}
+    ;;
+  }
+#   <a href={{link}}><img src= "{{logo_url_prefix}}{{rendered_value}}_1.png?interpolation=lanczos-none&resize={{final_size}}"/></a>
+#   Actual Link to Olympic Logos
+#   https://stillimg.olympic.org/games/280x280/2016_1.png?interpolation=lanczos-none&resize=140:140
+#   https://stillimg.olympic.org/games/280x280/2016.png?
 
   dimension: olympiad_year {
     description: "Olympic Year (YYYY)"
@@ -130,7 +148,8 @@ view: summer_games {
   dimension: olympiad_year_str {
     description: "Olympic Year (YYYY)"
     type: string
-    sql: ${TABLE}.Olympiad_Year ;;
+    sql: CAST(${TABLE}.Olympiad_Year AS STRING) ;; # In order to get suggestions in Filter
+    full_suggestions: yes
   }
 
   dimension_group: olympiad_duration {
@@ -153,141 +172,4 @@ view: summer_games {
     type: count
     drill_fields: [olympiad_id]
   }
-
-
-
-# TEST ---------------------------------------------------------------
-  dimension_group: today {
-    type: time
-    sql: CURRENT_TIMESTAMP() ;;
-  }
-
-  parameter: this_year_or_earlier{
-    description: "Current Year or Earlier"
-    type: unquoted
-    allowed_value: {
-      label: "Current year"
-      value: "this_year"
-    }
-    allowed_value: {
-      label: "Before this year"
-      value: "before_this_year"
-    }
-    allowed_value: {
-      label: "After 2012"
-      value: "aft_2012"
-    }
-  }
-
-  dimension_group: dashboard_olympiad_start {
-    description: "Dashboard Olympic Start Date"
-    type: time
-#     timeframes: [
-#       date, month, year
-#     ]
-#     convert_tz: no
-    datatype: date
-    sql: {% if {{this_year_or_earlier._parameter_value}} == 'this_year' %}
-        CASE
-          WHEN ${olympiad_start_year} = ${today_year}
-          THEN ${olympiad_start_date} ELSE NULL
-         END
-      {% elsif {{this_year_or_earlier._parameter_value}} == 'before_this_year' %}
-        CASE
-          WHEN ${olympiad_start_year} < ${today_year}
-          THEN ${olympiad_start_date} ELSE NULL
-        END
-      {% elsif {{this_year_or_earlier._parameter_value}} == 'aft_2012' %}
-        CASE
-          WHEN ${olympiad_start_year} >= 2012
-          THEN ${olympiad_start_date} ELSE NULL
-        END
-      {% else %}
-        ${olympiad_start_date}
-      {% endif %}
-  ;;
-#     sql: {% if {{this_year_or_earlier._parameter_value}} == "'before this year'" %}
-#         CASE WHEN ${TABLE}.Olympiad_StartDate < date_trunc("year", getdate()) THEN ${TABLE}.Olympiad_StartDate ELSE NULL END
-#         {% elsif {{this_year_or_earlier._parameter_value}} == "'this year'" %}
-#         ${TABLE}.Olympiad_StartDate WHERE ${TABLE}.Olympiad_StartDate = date_trunc("year", getdate())
-#         {% else %}
-#         ${TABLE}.Olympiad_StartDate
-#         {% endif %};;
-#     sql:  CASE
-#             WHEN {{this_year_or_earlier._parameter_value}} == "'this year'" THEN 'Male'
-#             ELSE NULL
-#           END;;
-
-    }
-
-#   dimension: dashboard_purchase_date {
-#     sql: {% if {{include_last_month._parameter_value}} == 'this' %}
-#           CASE
-#             WHEN ${purchase_month} = ${today_month}
-#             THEN ${purchase_date} ELSE NULL
-#            END
-#         {% elsif {{include_last_month._parameter_value}} == 'before' %}
-#           CASE
-#             WHEN ${purchase_month} < ${today_month}
-#             THEN ${purchase_date} ELSE NULL
-#           END
-#         {% else %}
-#           ${purchase_date}
-#         {% endif %}
-#     ;;
-#   }
-
-#   dimension_group: dashboard_olympiad_start {
-#     description: "Dashboard Olympic Start Date"
-#     type: time
-#     timeframes: [
-#       year
-#     ]
-#     convert_tz: no
-#     datatype: date
-#     sql: {% if {{this_year_or_earlier._parameter_value}} == "'before this year'" %}
-#         ${TABLE}.Olympiad_StartDate WHERE ${TABLE}.Olympiad_StartDate < date_trunc("year", getdate())
-#         {% elsif {{this_year_or_earlier._parameter_value}} == "'this year'" %}
-#         ${TABLE}.Olympiad_StartDate WHERE ${TABLE}.Olympiad_StartDate = date_trunc("year", getdate())
-#         {% else %}
-#         ${TABLE}.Olympiad_StartDate
-#         {% endif %};;
-#   }
-#   sql: {% if this_year_or_earlier == "'before this year'" %}
-#   ${TABLE}.Olympiad_StartDate WHERE ${TABLE}.Olympiad_StartDate < date_trunc("year", getdate())
-#   {% elsif this_year_or_earlier == "'this year'" %}
-#   ${TABLE}.Olympiad_StartDate WHERE ${TABLE}.Olympiad_StartDate = date_trunc("year", getdate())
-#   {% elsif this_year_or_earlier == "'2016'" %}
-#   ${TABLE}.Olympiad_StartDate WHERE ${TABLE}.Olympiad_StartDate = "'2016'"
-#   {% else %}
-#   ${TABLE}.Olympiad_StartDate
-#   {% endif %};;
-# }
-
-#   parameter: this_month_or_earlier{
-#     description: "Current Month or Earlier"
-#     type: unquoted
-#     allowed_value: {
-#       label: "Current Month"
-#       value: "this month"
-#     }
-#     allowed_value: {
-#       label: "Before this month"
-#       value: "before this month"
-#     }
-#     allowed_value: {
-#       label: "2016"
-#       value: "2016"
-#     }
-#   }
-
-#   filter: current_month_selector {
-#     description: "Current Month or Earlier"
-#     type: string
-#     default_value: "this month"
-#     full_suggestions: yes
-#     suggest_dimension: summer_games.olympiad_start
-#   }
-# TEST ---------------------------------------------------------------
-
 }

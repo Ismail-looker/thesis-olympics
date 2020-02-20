@@ -84,6 +84,7 @@ view: athlete_events {
     sql: ${TABLE}.NOC ;;
   }
 
+# e.g. 2016 Summer, 2012 Winter
   dimension: games {
     description: "YYYY Season"
     label: "Olympic Title"
@@ -91,19 +92,24 @@ view: athlete_events {
     sql: ${TABLE}.Games ;;
   }
 
+# YEAR
   dimension: olympic_year {
     description: "Olympic Year"
-    type: number
-    value_format: "####"
-    sql: ${TABLE}.Olympic_Year ;;
+    type: string
+    sql:  CAST(${TABLE}.Olympic_Year AS STRING) ;; # In order to get suggestions in Filter
+    # type: number
+    # value_format: "####"
+    # sql: ${TABLE}.Olympic_Year ;;
   }
 
+# SEASON
   dimension: olympic_season {
     description: "Olympic Season - Summer, Winter"
     type: string
     sql: ${TABLE}.Olympic_Season ;;
   }
 
+# HOST CITY
   dimension: city {
     description: "Olympic Host City"
     label: "Olympic City"
@@ -111,6 +117,7 @@ view: athlete_events {
     sql: ${TABLE}.City ;;
   }
 
+#
   dimension: sport {
     description: "Olympic Sport"
     label: "Olympic Sport"
@@ -132,7 +139,7 @@ view: athlete_events {
     sql: ${TABLE}.Medal ;;
   }
 
-  # YYYY-MM-DD but with MM-DD as 01-01 and only used for partitioning
+  # YYYY-MM-DD but with MM-DD as 01-01 and only used for partitioning of BQ Table
   dimension_group: olympic_year_partition_helper {
     type: time
     timeframes: [
