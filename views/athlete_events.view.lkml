@@ -17,6 +17,7 @@ view: athlete_events {
     description: "Athlete Identifier No (Not Unique in table)"
     label: "Athlete ID"
     type: number
+    hidden: yes
     sql: ${TABLE}.Athlete_ID ;;
   }
 
@@ -25,6 +26,11 @@ view: athlete_events {
     label: "Athlete Name"
     type: string
     sql: ${TABLE}.Athlete_Name ;;
+    link: {
+      label: "Athlete Detail Dashboard"
+      url: "/dashboards/603?Athlete%20Name={{ value | encode_uri }}"
+      icon_url: ""
+    }
   }
 
   dimension: athlete_gender {
@@ -115,6 +121,17 @@ view: athlete_events {
     label: "Olympic City"
     type: string
     sql: ${TABLE}.City ;;
+    map_layer_name: olympic_cities_map
+    link: {
+      label: "Athlete Detail Dashboard"
+      url: "/dashboards/604?Sport={{ value | encode_uri }}"
+      icon_url: ""
+    }
+    link: {
+      label: "Athlete Detail Dashboard"
+      url: "/dashboards/594?Olympic%20Year={{ value | encode_uri }}"
+      icon_url: ""
+    }
   }
 
 #
@@ -248,11 +265,12 @@ view: athlete_events {
     label: "Total Medal(s)"
     type: number
     sql: ${number_of_gold_medals}+${number_of_silver_medals}+${number_of_bronze_medals} ;;
+    value_format: "#,##0"
     drill_fields: [my_drill_fields*]
     # link: {
     #   url: "{{link}}&f[athlete_events.medal]=-NULL"
     #   }
-    html: <a href="{{link}}&f[athlete_events.medal]=-NULL" target="_blank">{{ value }}</a> ;;
+    html: <a href="{{link}}&f[athlete_events.medal]=-NULL" target="_blank">{{ rendered_value }}</a> ;;
   }
 
   parameter: medals_to_count {

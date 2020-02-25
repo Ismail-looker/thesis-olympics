@@ -33,7 +33,7 @@ explore: athlete_events {
   join: summer_games {                                        # Join 2
     type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
     relationship: many_to_one
-    sql_on: ${athlete_events.olympic_year} = ${summer_games.olympiad_year}
+    sql_on: ${athlete_events.olympic_year} = ${summer_games.olympiad_year_str}
       AND ${athlete_events.olympic_season} = "Summer";;
   }
 
@@ -45,7 +45,7 @@ explore: summer_games {
   join: athlete_events {
     type: left_outer
     relationship: one_to_many
-    sql_on: ${summer_games.olympiad_year} = ${athlete_events.olympic_year}
+    sql_on: ${summer_games.olympiad_year_str} = ${athlete_events.olympic_year}
           --AND ${athlete_events.olympic_season} = "Summer"
           ;;
   }
@@ -86,3 +86,27 @@ map_layer: body_map {
   # projection: airy
   property_label_key: "Body"
 }
+
+map_layer: olympic_cities_map {
+  # feature_key: "Name"
+  label: "Host City"
+  file: "olympic_cities.json"
+  # min_zoom_level: 1.6
+  property_key: "Year"
+  # max_zoom_level: 12
+  # format: topojson
+  # projection: airy
+  property_label_key: "Name"
+}
+# "properties": {
+#   "Name": "Athens",
+#   "description": null,
+#   "ID": 1,
+#   "Olympiad": "I",
+#   "Year": 1896,
+#   "Order": "1st",
+#   "Start_date": "1896-04-06",
+#   "End_date": "1896-04-15",
+#   "Host_Country": "Greece",
+#   "Host_City_Wiki": "https://en.wikipedia.org/wiki/Athens"
+#   }
