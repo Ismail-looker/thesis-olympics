@@ -2,6 +2,7 @@ view: summer_games {
   sql_table_name: Olympics.Summer_Games ;;
 
   dimension: olympiad_id {
+    group_label: "Order of the Olympics"
     description: "Unique ID"
     type: number
     primary_key: yes
@@ -116,6 +117,7 @@ view: summer_games {
   }
 
   dimension: olympiad_ordinal {
+    group_label: "Order of the Olympics"
     description: "1st, 2nd, ..."
     type: string
     sql: ${TABLE}.Olympiad_Ordinal ;;
@@ -128,20 +130,20 @@ view: summer_games {
   }
 
   dimension: olympiad_roman {
+    group_label: "Order of the Olympics"
     description: "I, II, III, IV,..."
     type: string
     sql: ${TABLE}.Olympiad_Roman ;;
   }
 
   dimension_group: olympiad_start {
+    group_label: "Olympic Timeline"
     description: "Olympic Start Date"
     type: time
     timeframes: [
       raw,
       date,
-      week,
       month,
-      quarter,
       year
     ]
     convert_tz: no
@@ -151,26 +153,18 @@ view: summer_games {
 
 # Olympic End Date
   dimension_group: olympiad_end {
+    group_label: "Olympic Timeline"
     description: "Olympic End Date"
     type: time
     timeframes: [
       raw,
       date,
-      week,
       month,
-      quarter,
       year
     ]
     convert_tz: no
     datatype: date
     sql: ${TABLE}.Olympiad_EndDate ;;
-    html: {{linked_value}} | date: format: 'abbreviated_date'
-      ;;
-#       {% if olympiad_end_date._in_query %}
-#         {{linked_value}} | date: format: 'abbreviated_date'
-#       {% else %}
-#         event
-#       {% endif %}
     }
 
   dimension: olympiad_status {
@@ -209,6 +203,7 @@ view: summer_games {
   }
 
   dimension: olympiad_year {
+    group_label: "Olympic Timeline"
     description: "Olympic Year (YYYY)"
     type: number
     value_format: "####"
@@ -216,6 +211,7 @@ view: summer_games {
   }
 
   dimension: olympiad_year_str {
+    group_label: "Olympic Timeline"
     description: "Olympic Year (YYYY)"
     type: string
     sql: CAST(${TABLE}.Olympiad_Year AS STRING) ;; # In order to get suggestions in Filter
@@ -223,6 +219,7 @@ view: summer_games {
   }
 
   dimension_group: olympiad_duration {
+    group_label: "Olympic Timeline"
     description: "How long was the Olympics?"
     label: "
     {% if days_olympiad_duration._in_query %} Olympiad Duration in Days
