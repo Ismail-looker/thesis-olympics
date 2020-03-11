@@ -116,7 +116,7 @@ view: athlete_events {
     description: "Olympic Year String"
     type: string
     sql:  CAST(${TABLE}.Olympic_Year AS STRING) ;; # In order to get suggestions in Filter
-    hidden: yes
+#     hidden: yes
 #     type: number
 #     value_format: "####"
 #     sql: ${TABLE}.Olympic_Year ;;
