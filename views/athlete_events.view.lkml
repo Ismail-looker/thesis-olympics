@@ -106,6 +106,8 @@ view: athlete_events {
     # type: number
     # value_format: "####"
     # sql: ${TABLE}.Olympic_Year ;;
+    full_suggestions: yes
+    bypass_suggest_restrictions: yes
   }
 
 # SEASON

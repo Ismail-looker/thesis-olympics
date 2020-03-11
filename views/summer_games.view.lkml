@@ -209,6 +209,7 @@ view: summer_games {
     value_format: "####"
     sql: ${TABLE}.Olympiad_Year ;;
     full_suggestions: yes
+    bypass_suggest_restrictions: yes
   }
 
   dimension: olympiad_year_str {
