@@ -51,7 +51,7 @@
           ],
           "type": "Polygon",
           "properties": {
-            "Body": "Chest",
+            "Body": "CHEST",
             "id": "rect8-3",
             "stroke": "#555555",
             "stroke-width": 2,
@@ -69,7 +69,7 @@
           ],
           "type": "Polygon",
           "properties": {
-            "Body": "Mid_body",
+            "Body": "ABDOMEN AND ARMS",
             "id": "rect8-6",
             "stroke": "#555555",
             "stroke-width": 2,
@@ -105,7 +105,7 @@
           ],
           "type": "Polygon",
           "properties": {
-            "Body": "Lower_body",
+            "Body": "LEGS",
             "id": "rect8-0",
             "stroke": "#555555",
             "stroke-width": 2,
@@ -123,7 +123,7 @@
           ],
           "type": "Polygon",
           "properties": {
-            "Body": "Left_hand",
+            "Body": "LEFT HAND",
             "id": "rect8-0",
             "stroke": "#555555",
             "stroke-width": 2,
@@ -150,7 +150,7 @@
           ],
           "type": "MultiPolygon",
           "properties": {
-            "Body": "Head",
+            "Body": "HEAD",
             "id": "rect8-4",
             "stroke": "#555555",
             "stroke-width": 2,

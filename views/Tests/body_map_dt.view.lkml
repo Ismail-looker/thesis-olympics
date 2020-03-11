@@ -62,7 +62,34 @@ view: body_map_dt {
 
   dimension: body {
     type: string
-    sql: ${TABLE}.Body ;;
+#     sql: ${TABLE}.Body ;;
+    case: {
+      when: {
+        sql: ${TABLE}.Body = "Head" ;;
+        label: "HEAD"
+      }
+      when: {
+        sql: ${TABLE}.Body = "Chest" ;;
+        label: "CHEST"
+      }
+      when: {
+        sql: ${TABLE}.Body = "Left_hand" ;;
+        label: "LEFT HAND"
+      }
+      when: {
+        sql: ${TABLE}.Body = "Right_hand" ;;
+        label: "RIGHT HAND"
+      }
+      when: {
+        sql: ${TABLE}.Body = "Lower_body" ;;
+        label: "LEGS"
+      }
+      when: {
+        sql: ${TABLE}.Body = "Mid_body" ;;
+        label: "ABDOMEN AND ARMS"
+      }
+      else: "unknown"
+    }
     map_layer_name: body_map
   }
 
