@@ -53,18 +53,7 @@ view: body_map_dt {
                   SELECT  48 as id, "Lower_body" as Body UNION ALL
                   SELECT  49 as id, "Lower_body" as Body UNION ALL
                   SELECT  50 as id, "Lower_body" as Body UNION ALL
-                  SELECT  51 as id, "Lower_body" as Body UNION ALL
-                  SELECT  52 as id, "Lower_body" as Body UNION ALL
-                  SELECT  53 as id, "Lower_body" as Body UNION ALL
-                  SELECT  54 as id, "Lower_body" as Body UNION ALL
-                  SELECT  55 as id, "Lower_body" as Body UNION ALL
-                  SELECT  56 as id, "Lower_body" as Body UNION ALL
-                  SELECT  57 as id, "Lower_body" as Body UNION ALL
-                  SELECT  58 as id, "Lower_body" as Body UNION ALL
-                  SELECT  59 as id, "Lower_body" as Body UNION ALL
-                  SELECT  60 as id, "Lower_body" as Body UNION ALL
-                  SELECT  61 as id, "Lower_body" as Body UNION ALL
-                  SELECT  62 as id, "Lower_body" as Body
+                  SELECT  51 as id, "Lower_body" as Body
   ;;
   }
   dimension: id {
