@@ -21,14 +21,50 @@ view: body_map_dt {
                   SELECT  16 as id, "Left_hand" as Body UNION ALL
                   SELECT  17 as id, "Left_hand" as Body UNION ALL
                   SELECT  18 as id, "Left_hand" as Body UNION ALL
-                  SELECT  19 as id, "Right_hand" as Body UNION ALL
-                  SELECT  20 as id, "Right_hand" as Body UNION ALL
-                  SELECT  21 as id, "Lower_body" as Body UNION ALL
-                  SELECT  22 as id, "Lower_body" as Body UNION ALL
-                  SELECT  23 as id, "Mid_body" as Body UNION ALL
-                  SELECT  24 as id, "Mid_body" as Body UNION ALL
-                  SELECT  25 as id, "Lower_body" as Body UNION ALL
-                  SELECT  26 as id, "Lower_body" as Body
+                  SELECT  19 as id, "Left_hand" as Body UNION ALL
+                  SELECT  20 as id, "Left_hand" as Body UNION ALL
+                  SELECT  21 as id, "Left_hand" as Body UNION ALL
+                  SELECT  22 as id, "Left_hand" as Body UNION ALL
+                  SELECT  23 as id, "Left_hand" as Body UNION ALL
+                  SELECT  24 as id, "Right_hand" as Body UNION ALL
+                  SELECT  25 as id, "Right_hand" as Body UNION ALL
+                  SELECT  26 as id, "Lower_body" as Body UNION ALL
+                  SELECT  27 as id, "Lower_body" as Body UNION ALL
+                  SELECT  28 as id, "Mid_body" as Body UNION ALL
+                  SELECT  29 as id, "Mid_body" as Body UNION ALL
+                  SELECT  30 as id, "Mid_body" as Body UNION ALL
+                  SELECT  31 as id, "Mid_body" as Body UNION ALL
+                  SELECT  32 as id, "Mid_body" as Body UNION ALL
+                  SELECT  33 as id, "Lower_body" as Body UNION ALL
+                  SELECT  34 as id, "Lower_body" as Body UNION ALL
+                  SELECT  35 as id, "Lower_body" as Body UNION ALL
+                  SELECT  36 as id, "Lower_body" as Body UNION ALL
+                  SELECT  37 as id, "Lower_body" as Body UNION ALL
+                  SELECT  38 as id, "Lower_body" as Body UNION ALL
+                  SELECT  39 as id, "Lower_body" as Body UNION ALL
+                  SELECT  40 as id, "Lower_body" as Body UNION ALL
+                  SELECT  41 as id, "Lower_body" as Body UNION ALL
+                  SELECT  42 as id, "Lower_body" as Body UNION ALL
+                  SELECT  43 as id, "Lower_body" as Body UNION ALL
+                  SELECT  44 as id, "Lower_body" as Body UNION ALL
+                  SELECT  45 as id, "Lower_body" as Body UNION ALL
+                  SELECT  46 as id, "Lower_body" as Body UNION ALL
+                  SELECT  47 as id, "Lower_body" as Body UNION ALL
+                  SELECT  48 as id, "Lower_body" as Body UNION ALL
+                  SELECT  49 as id, "Lower_body" as Body UNION ALL
+                  SELECT  50 as id, "Lower_body" as Body UNION ALL
+                  SELECT  51 as id, "Lower_body" as Body UNION ALL
+                  SELECT  52 as id, "Lower_body" as Body UNION ALL
+                  SELECT  53 as id, "Lower_body" as Body UNION ALL
+                  SELECT  54 as id, "Lower_body" as Body UNION ALL
+                  SELECT  55 as id, "Lower_body" as Body UNION ALL
+                  SELECT  56 as id, "Lower_body" as Body UNION ALL
+                  SELECT  57 as id, "Lower_body" as Body UNION ALL
+                  SELECT  58 as id, "Lower_body" as Body UNION ALL
+                  SELECT  59 as id, "Lower_body" as Body UNION ALL
+                  SELECT  60 as id, "Lower_body" as Body UNION ALL
+                  SELECT  61 as id, "Lower_body" as Body UNION ALL
+                  SELECT  62 as id, "Lower_body" as Body
   ;;
   }
   dimension: id {
