@@ -28,9 +28,9 @@ Part 1:
 - [x] Choose Dataset
     - 120 Years Olympics (1896 to 2006) &#128197;  &#9989;
 - [x] Ask Questions of Dataset &#10067; &#9989;
-    - Q1 - Are veteran host nations better performers at the olympics? &#127967; &#127942; &#127941;
+    - Q1 - How has the Olympics changed over the past 12 decades? &#127967; &#127942; &#127941;
     - Q2 - Has gender equality improved over the years? &#9792; vs &#9794;
-    - Q3 - &#128176;
+    - Q3 - What other conclusions can we draw? &#128176;
 - [x] Choose "angle" for dataset &#9989;
     - What does the olympic performance look like for nations who have hosted the Olympics at least once? &#129351; &#129352; &#129353; &#127757;
 - [x] Write Thesis Proposal &#128396; &#128467; &#9989;

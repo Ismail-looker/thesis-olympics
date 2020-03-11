@@ -100,7 +100,7 @@ view: national_olympic_committees {
             <a href={{link}}><img src="https://via.placeholder.com/200x150.jpg?text={{rendered_value}}" height= "32"></a>
           {% elsif iso_alpha_2._value != null %}
             {% assign flag_url_prefix = "https://lipis.github.io/flag-icon-css/flags/4x3/" %}
-            <a href={{link}}><img src= {{flag_url_prefix}}{{ iso_alpha_2._value | downcase | append: ".svg" }} height= "256"/></a>
+            <a href={{link}}><img src= {{flag_url_prefix}}{{ iso_alpha_2._value | downcase | append: ".svg" }} height= "190"/></a>
           {% else %}
             {{linked_value}}
           {% endif %}
