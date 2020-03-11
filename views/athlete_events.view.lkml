@@ -28,7 +28,7 @@ view: athlete_events {
     sql: ${TABLE}.Athlete_Name ;;
     link: {
       label: "Athlete Detail Dashboard"
-      url: "/dashboards/603?Athlete%20Name={{ value | encode_uri }}"
+      url: "/dashboards/603?Athlete={{ value | encode_uri }}"
       icon_url: ""
     }
   }

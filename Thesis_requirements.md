@@ -16,7 +16,7 @@ Dashboards: &nbsp;
   &nbsp;&nbsp;<a href="https://learn.looker.com/projects/advanced_lookml/files/05_extensions.md">Sport Event &#10095;</a>  &nbsp;
 </div>
 <div style="float:left;font-weight:bold;">
-  &nbsp;&nbsp;<a href="https://learn.looker.com/projects/advanced_lookml/files/05_extensions.md">Athlete &#10095;</a>  &nbsp;
+  &nbsp;&nbsp;<a href="https://dcl.dev.looker.com/dashboards/603">Athlete &#10095;</a>  &nbsp;
 </div>
 
 Put your documentation here! Your text is rendered with [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown).
