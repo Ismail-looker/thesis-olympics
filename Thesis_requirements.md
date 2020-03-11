@@ -4,7 +4,10 @@
 Dashboards: &nbsp;
 </div>
 <div style="float:left;font-weight:bold;">
-  <a href="https://learn.looker.com/projects/advanced_lookml/files/05_extensions.md">Olymipics &#10095;</a> &nbsp;
+  <a href="https://dcl.dev.looker.com/dashboards/594">Olymipics Overview &#10095;</a> &nbsp;
+</div>
+<div style="float:left;font-weight:bold;">
+  &nbsp;&nbsp;<a href="https://dcl.dev.looker.com/dashboards/596">Olympic Year &#10095;</a>  &nbsp;
 </div>
 <div style="float:left;font-weight:bold;">
   &nbsp;&nbsp;<a href="https://learn.looker.com/projects/advanced_lookml/files/05_extensions.md">Country &#10095;</a>  &nbsp;
@@ -15,9 +18,6 @@ Dashboards: &nbsp;
 <div style="float:left;font-weight:bold;">
   &nbsp;&nbsp;<a href="https://learn.looker.com/projects/advanced_lookml/files/05_extensions.md">Athlete &#10095;</a>  &nbsp;
 </div>
-<div style="float:left;font-weight:bold;">
-  &nbsp;&nbsp;<a href="https://learn.looker.com/projects/advanced_lookml/files/05_extensions.md">Extensions&#10095;</a> &nbsp;
-</div><div style="float:clear;">&nbsp;</div>
 
 Put your documentation here! Your text is rendered with [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown).
 
@@ -38,23 +38,23 @@ Part 1:
 
 Part 2:
 
-- [ ] One derived table (can also be a PDT or NDT)
+- [x] One derived table (can also be a PDT or NDT)
 - [x] At least one explore with 2+ joins &#9989;
 - [ ] Drill fields on every measure
 - [ ] At least one Looker Block
-- [ ] Check-in with Mentor
+- [x] Check-in with Mentor
 
 Part 3:
 
 - [x] A feature involving Liquid HTML (parameters or templated filters) to make your explores dynamic &#9989;
 - [ ] Advanced Analysis (such as Ranking, Cohort Analysis, Retention Analysis, Forecasting)
 - [x] One new feature from the past three releases &#9989;
-- [ ] Check-in with Mentor
+- [x] Check-in with Mentor
 
 Part 4:
 
-- [ ] A presentable dashboard centered around a use case
-- [ ] Practice presentation with Mentor
+- [x] A presentable dashboard centered around a use case
+- [x] Practice presentation with Mentor
 
 <div style="border-radius:5px 5px 0 0;padding:8px;background-color:rgb(221,221,221);">
  From the <a href="https://learn.looker.com/projects/advanced_lookml/files/users.view.lkml" style="font-family:Monaco,Menlo,Consolas,Courier New,monospace;">users</a> View File</a>
