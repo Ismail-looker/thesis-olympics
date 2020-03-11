@@ -101,11 +101,25 @@ view: athlete_events {
 # YEAR
   dimension: olympic_year {
     description: "Olympic Year"
+#     type: string
+#     sql:  CAST(${TABLE}.Olympic_Year AS STRING) ;; # In order to get suggestions in Filter
+    type: number
+    value_format: "####"
+    sql: ${TABLE}.Olympic_Year ;;
+    full_suggestions: yes
+    bypass_suggest_restrictions: yes
+    suggest_dimension: olympic_year_string
+  }
+
+# YEAR
+  dimension: olympic_year_string {
+    description: "Olympic Year String"
     type: string
     sql:  CAST(${TABLE}.Olympic_Year AS STRING) ;; # In order to get suggestions in Filter
-    # type: number
-    # value_format: "####"
-    # sql: ${TABLE}.Olympic_Year ;;
+    hidden: yes
+#     type: number
+#     value_format: "####"
+#     sql: ${TABLE}.Olympic_Year ;;
     full_suggestions: yes
     bypass_suggest_restrictions: yes
   }

@@ -33,7 +33,7 @@ explore: athlete_events {
   join: summer_games {                                        # Join 2
     type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
     relationship: many_to_one
-    sql_on: ${athlete_events.olympic_year} = ${summer_games.olympiad_year_str}
+    sql_on: ${athlete_events.olympic_year} = ${summer_games.olympiad_year}
       AND ${athlete_events.olympic_season} = "Summer";;
   }
 
@@ -45,7 +45,7 @@ explore: summer_games {
   join: athlete_events {
     type: left_outer
     relationship: one_to_many
-    sql_on: ${summer_games.olympiad_year_str} = ${athlete_events.olympic_year}
+    sql_on: ${summer_games.olympiad_year} = ${athlete_events.olympic_year}
           --AND ${athlete_events.olympic_season} = "Summer"
           ;;
   }
