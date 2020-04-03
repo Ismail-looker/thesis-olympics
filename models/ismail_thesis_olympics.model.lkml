@@ -13,7 +13,7 @@ persist_with: ismail_thesis_olympics_default_datagroup
 
 explore: athlete_events {
   label: "Athlete Olympic Events (120 Years)"
-  view_label: "Athlete Olympic Events"
+#   view_label: "Athlete Olympic Events"
   case_sensitive: no
 
   join: national_olympic_committees {                         # Join 1
@@ -35,6 +35,13 @@ explore: athlete_events {
     relationship: many_to_one
     sql_on: ${athlete_events.olympic_year} = ${summer_games.olympiad_year}
       AND ${athlete_events.olympic_season} = "Summer";;
+  }
+  join: extended_view {
+    type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
+    relationship: many_to_one
+    sql_on: ${athlete_events.olympic_year} = ${extended_view.olympiad_year}
+      AND ${athlete_events.olympic_season} = "Summer";;
+
   }
 
 }
@@ -61,7 +68,11 @@ explore: summer_games {
 
 #------------------------------------------- TESTING AREA----------------------------------
 # explore: testing_precision_filter_dt {}
+explore: testing_liquid {}
+
 explore: body_map_dt {}
+
+explore: menu_dt {}
 
 map_layer: modern_olympics_layer {
   # feature_key: "Name"

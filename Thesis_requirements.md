@@ -1,3 +1,11 @@
+<head>
+  <!-- Default head tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon head tag -->
+  <link rel="icon" href="https://github.githubassets.com/favicon.ico?" type="image/x-icon">
+</head>
 <h1 style="color:rgb(100,81,138)">Thesis Requirements</h1>
 
 <div style="float:left;font-weight:bold;">
