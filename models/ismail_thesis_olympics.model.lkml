@@ -11,6 +11,8 @@ datagroup: ismail_thesis_olympics_default_datagroup {
 
 persist_with: ismail_thesis_olympics_default_datagroup
 
+#------------------------------------------- Explores ----------------------------------
+
 explore: athlete_events {
   label: "Athlete Olympic Events (120 Years)"
 #   view_label: "Athlete Olympic Events"
@@ -65,21 +67,27 @@ explore: summer_games {
 }
 
 # explore: national_olympic_committees {}
-
-#------------------------------------------- TESTING AREA----------------------------------
-# explore: testing_precision_filter_dt {}
-explore: testing_liquid {}
-
 explore: body_map_dt {}
 
-explore: menu_dt {}
-
+#------------------------------------------- Map Layers ----------------------------------
 map_layer: modern_olympics_layer {
   # feature_key: "Name"
   label: "Host City"
   file: "other_maps/modern_olympics.topojson"
   # min_zoom_level: 1.6
   # property_key: "Name"
+  # max_zoom_level: 12
+  # format: topojson
+  # projection: airy
+  property_label_key: "Name"
+}
+
+map_layer: olympic_cities_map {
+  # feature_key: "Name"
+  label: "Host City"
+  file: "olympic_cities.json"
+  # min_zoom_level: 1.6
+  property_key: "Year"
   # max_zoom_level: 12
   # format: topojson
   # projection: airy
@@ -98,17 +106,48 @@ map_layer: body_map {
   property_label_key: "Body"
 }
 
-map_layer: olympic_cities_map {
-  # feature_key: "Name"
-  label: "Host City"
-  file: "olympic_cities.json"
-  # min_zoom_level: 1.6
-  property_key: "Year"
-  # max_zoom_level: 12
-  # format: topojson
-  # projection: airy
-  property_label_key: "Name"
+#------------------------------------------- TESTING AREA----------------------------------
+# explore: testing_precision_filter_dt {}
+# explore: testing_liquid {}
+# explore: menu_dt {}
+
+explore: athlete_events_extends_test {
+#   sql_always_where:   {% if _user_attributes['first_name'] == 'Isbmail' %} 1=1 {% else %}athlete_events_extends_test.noc = 'fra'{% endif %} ;;
+  label: "Athlete Olympic Events Test Hub"
+#   view_label: "Athlete Olympic Events"
+  case_sensitive: no
+
+  join: national_olympic_committees {                         # Join 1
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.noc} = ${national_olympic_committees.noc};;
+#     fields: [
+#       national_olympic_committees.created_date,
+#       national_olympic_committees.full_name,
+#       national_olympic_committees.email,
+#       national_olympic_committees.age,
+#       national_olympic_committees.gender,
+#       national_olympic_committees.state_on_map
+#     ]
+  }
+
+  join: summer_games {                                        # Join 2
+    type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.olympic_year} = ${summer_games.olympiad_year}
+      AND ${athlete_events_extends_test.olympic_season} = "Summer";;
+  }
+  join: extended_view {
+    type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.olympic_year} = ${extended_view.olympiad_year}
+      AND ${athlete_events_extends_test.olympic_season} = "Summer";;
+
+  }
+
 }
+
+
 # "properties": {
 #   "Name": "Athens",
 #   "description": null,

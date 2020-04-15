@@ -40,6 +40,10 @@ view: national_olympic_committees {
       url: "https://en.wikipedia.org/wiki/{{ value | encode_uri }}"
       # <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/aw.svg" alt="Aruba Flag">
     }
+    link: {
+      label: "Breadcrumbs link"
+      url: "/dashboards/594?OlympicYear={{ _filters['athlete_events.olympic_year_string'] | url_encode }}"
+    }
   }
 
   dimension: noc {

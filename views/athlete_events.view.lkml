@@ -21,22 +21,7 @@ view: athlete_events {
     sql: ${TABLE}.Athlete_ID ;;
   }
 
-#   dimension: merch_yr_wk {
-#     type: number
-#     group_label: "Calendar Merch Week"
-#     group_item_label: "{% if _explore._name == 'dim_po_detail_expected_date_bandm' %} Week Ordered
-#     {% else %} Merch Year Week
-#     {% endif %}"
-#     value_format: "0"
-#     label: "{% if _explore._name == 'the_explore_we_want_a_new_label' %} New Name
-#     {% else %} Normal Name
-#     {% endif %}"
-#     description: "Merchandise calendar year and week (e.g. 201951)"
-#     sql: ${TABLE}.MERCH_YR_WK ;;
-#   }
-
   dimension: athlete_name {
-    view_label: "{% if _explore._name == 'summer_games' %}Summer Games{% else %}Athlete Events{% endif %}"
     description: "Name of Athlete"
     label: "Athlete Name"
     type: string
@@ -217,7 +202,7 @@ view: athlete_events {
 
   measure: count {
     type: count
-    drill_fields: [athlete_name]
+    drill_fields: [my_drill_fields*]
   }
 
 #   New Measures   -----------------------------------------------------------
@@ -334,25 +319,4 @@ view: athlete_events {
     html: <a href="/explore/ismail_thesis_olympics/athlete_events?fields=athlete_events.my_drill_fields*&f[athlete_events.medal]={% parameter medals_to_count %}" target="_blank">{{ value }}</a> ;;
 
   }
-
-  # --------- TEST  ----------------------
-  filter: account_filter {
-    type: string
-    suggest_dimension: sport
-  }
-
-  dimension: account_satisfies_filter {
-    type: yesno
-    hidden: yes
-    sql: {% condition account_filter %} ${sport} {% endcondition %} ;;
-  }
-
-  measure: count_dynamic_account {
-    type: count
-    filters: {
-      field: account_satisfies_filter
-      value: "yes"
-    }
-  }
-
 }

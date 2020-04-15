@@ -12,6 +12,9 @@
 Dashboards: &nbsp;
 </div>
 <div style="float:left;font-weight:bold;">
+<a href="https://dcl.dev.looker.com/dashboards/594?Olympic%20Year={{ _filters['athlete_events.olympic_year_string'] | url_encode }}">Olymipics Overview &#10095;</a>
+</div>
+<div style="float:left;font-weight:bold;">
   <a href="https://dcl.dev.looker.com/dashboards/594">Olymipics Overview &#10095;</a> &nbsp;
 </div>
 <div style="float:left;font-weight:bold;">
