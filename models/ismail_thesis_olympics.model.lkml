@@ -110,6 +110,17 @@ map_layer: body_map {
 # explore: testing_precision_filter_dt {}
 # explore: testing_liquid {}
 # explore: menu_dt {}
+explore: history_2 {}
+explore: presenter {
+  view_name: presenter
+  join: unique_presenters_final {
+
+    sql_on: ${unique_presenters_final.unique_presenter}=${presenter.presenter_1} ;;
+    relationship: many_to_one
+  }
+}
+# explore: unique_presenters {}
+explore: unique_presenters_final {}
 
 explore: athlete_events_extends_test {
 #   sql_always_where:   {% if _user_attributes['first_name'] == 'Isbmail' %} 1=1 {% else %}athlete_events_extends_test.noc = 'fra'{% endif %} ;;

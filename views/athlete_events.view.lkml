@@ -3,7 +3,7 @@ view: athlete_events {
 
   set: my_drill_fields {
     fields: [unique_id, athlete_id, athlete_name, noc, national_olympic_committees.iso_country, sport, olympic_event, medal]
-    }
+  }
 
   dimension: unique_id {
     description: "Unique ID"
@@ -269,7 +269,7 @@ view: athlete_events {
       label: "bronze"
       url: "{{link}}"
       icon_url: "https://storage.googleapis.com/120-years-olympics/pics/bronze.png"
-      }
+    }
 #   <img src="https://storage.googleapis.com/120-years-olympics/pics/bronze.png">
 #   <img src="https://storage.googleapis.com/120-years-olympics/pics/silver.png">
 #   <img src="https://storage.googleapis.com/120-years-olympics/pics/gold.png">

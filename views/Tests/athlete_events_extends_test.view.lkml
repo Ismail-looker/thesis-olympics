@@ -22,6 +22,56 @@ view: athlete_events_extends_test {
     }
   }
 
+  parameter: time_period {
+    type: unquoted
+    allowed_value: {
+      label: "30 Days"
+      value: "30"
+    }
+    allowed_value: {
+      label: "60 Days"
+      value: "60"
+    }
+    allowed_value: {
+      label: "90 Days"
+      value: "90"
+    }
+  }
+
+  dimension: period {
+    label_from_parameter: time_period
+    type: number
+    sql:
+    {% if time_period._parameter_value == '30' %}
+    30
+    {% elsif time_period._parameter_value == '60' %}
+    60
+    {% elsif time_period._parameter_value == '90' %}
+    90
+    {% else %}
+    NULL
+    {% endif %} ;;
+  }
+
+
+  dimension: month_formatted {
+    group_label: "Created"
+    label: "Month"
+    sql:  "2020-05" ;;
+    html: {{rendered_value}} | {{ rendered_value | append: "-01" | date: "%b %y" }};;
+  }
+
+
+  dimension: falsey {
+    type: string
+    sql: false ;;
+    html: {% if falsey._value %}
+          'style'
+          {% else %}
+          other style
+          {% endif %}
+          ;;
+  }
 # --------- TEST 2 ----------------------
 
 #   dimension: merch_yr_wk {
@@ -43,7 +93,7 @@ view: athlete_events_extends_test {
   dimension: athlete_name {
     description: "Name of Athlete"
 #     label: "Athlete Name"
-    label: "{% if _explore._name == 'summer_games' %}Athlete name in Summer Games{% else %}Athlete name Otherwise{% endif %}"
+    label: "{% if _explore._name == 'summer_games' %}Athlete name in Summer Games{% else %}Athlete name (Liquid){% endif %}"
     type: string
     sql: ${TABLE}.Athlete_Name ;;
     link: {
@@ -61,9 +111,87 @@ view: athlete_events_extends_test {
     type: string
     sql: 1 ;;
     html: <a target="new" href="/dashboards/594?OlympicYear={{ _filters['athlete_events_extends_test.olympic_year_string'] | url_encode }}">Dashboard Overview &#10095;</a>   <a target="new" href="/dashboards/594?OlympicYear={{ _filters['athlete_events_extends_test.olympic_year_string'] | url_encode }}">Dashboard 2 &#10095;</a> ;;
+
   }
 
 # --------- TEST 5 ----------------------
+
+  dimension: dashboard_links {
+    label: " "
+#       hidden: yes
+    type: string
+    sql: 1 ;;
+   }
+
+
+
+#   dimension: dril_field {
+#     type: string
+#     drill_fields: [gender, count]
+#     sql: ${TABLE}.first_name ;;
+#     link: {
+#       label: "tetsy"
+#       url: "
+#       {% assign filter_config = '{}' %}
+#       {% assign vis_config = '
+#       {\"type\":\"table\"}' %}
+#
+#       {{ dummy._link }}&vis_config={{ vis_config | encode_uri }}&pivots=users.state&filter_config={{ filter_config | encode_uri }}"
+#     }
+#   }
+
+#   dimension: dril_field {
+#     type: string
+#     drill_fields: [gender, count]
+#     sql: ${TABLE}.first_name ;;
+#     link: {
+#       label: "tetsy"
+#       url: "
+#       {% assign filter_config = '{}' %}
+#       {% assign vis_config = '
+#       {\"type\":\"table\"}' %}
+#
+#       {{ dummy._link }}&vis_config={{ vis_config | encode_uri }}&pivots=users.state&filter_config={{ filter_config | encode_uri }}"
+#     }
+#   }
+
+#   dimension: state {
+#     type: string
+#     sql: ${TABLE}.state ;;
+#     drill_fields: [zip]
+#     map_layer_name: us_states
+#     link: {
+#       label: "By Zip"
+#       url: "
+#       {% assign vis= '{\"map_plot_mode\":\"points\",
+#       \"heatmap_gridlines\":false,
+#       \"heatmap_gridlines_empty\":false,
+#       \"heatmap_opacity\":0.5,
+#       \"show_region_field\":true,
+#       \"draw_map_labels_above_data\":true,
+#       \"map_tile_provider\":\"light\",
+#       \"map_position\":\"fit_data\",
+#       \"map_scale_indicator\":\"off\",
+#       \"map_pannable\":true,
+#       \"map_zoomable\":true,
+#       \"map_marker_type\":\"circle\",
+#       \"map_marker_icon_name\":\"default\",
+#       \"map_marker_radius_mode\":\"proportional_value\",
+#       \"map_marker_units\":\"meters\",
+#       \"map_marker_proportional_scale_type\":\"linear\",
+#       \"map_marker_color_mode\":\"fixed\",
+#       \"show_view_names\":false,
+#       \"show_legend\":true,
+#       \"quantize_map_value_colors\":false,
+#       \"reverse_map_value_colors\":false,
+#       \"type\":\"looker_map\",
+#       \"defaults_version\":1}' %}
+#
+#       {% assign dynamic_fields= '[]' %}
+#
+#       {{link}}&f[covid_insights_1.category]=&f[covid_insights_1.state]=TX&vis={{vis | encode_uri}}&dynamic_fields={{dynamic_fields | encode_uri}}"
+#     }
+#   }
 
 #   measure: count_distinct_division_category_combo {
 #     label: "Unique Division|Categories"
