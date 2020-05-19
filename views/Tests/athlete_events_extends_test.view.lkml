@@ -22,19 +22,47 @@ view: athlete_events_extends_test {
     }
   }
 
+  dimension: array_test {
+    type: string
+#     sql:  "1,2,3,4,5,6,9,10" ;; # Without [Square brackets]
+#     sql:  "apples, oranges, peaches, plums" ;; # Without [Square brackets]
+#     sql:  "[1,2,3,4,5,6,9,10]" ;;  # With [Square brackets]
+    sql:  "[apples, oranges, peaches, plums]" ;;
+  }
+
+  dimension: array_test_size {
+    type: string
+    sql: {% assign the_array = ${array_test} | split: "," %} {{ the_array.size }} ;;
+  }
+
+#   parameter: time_period {
+#     type: string
+#     allowed_value: {
+#       label: "30 Days"
+#       value: "30"
+#     }
+#     allowed_value: {
+#       label: "60 Days"
+#       value: "60"
+#     }
+#     allowed_value: {
+#       label: "90 Days"
+#       value: "90"
+#     }
+#   }
   parameter: time_period {
-    type: unquoted
+    type: string
     allowed_value: {
       label: "30 Days"
-      value: "30"
+      value: "a_30.000"
     }
     allowed_value: {
       label: "60 Days"
-      value: "60"
+      value: "b_60.000"
     }
     allowed_value: {
       label: "90 Days"
-      value: "90"
+      value: "c_90.000"
     }
   }
 
@@ -42,17 +70,22 @@ view: athlete_events_extends_test {
     label_from_parameter: time_period
     type: number
     sql:
-    {% if time_period._parameter_value == '30' %}
+    {% if time_period._parameter_value == "'a_30.000'" %}
     30
-    {% elsif time_period._parameter_value == '60' %}
+    {% elsif time_period._parameter_value == "'b_60.000'" %}
     60
-    {% elsif time_period._parameter_value == '90' %}
+    {% elsif time_period._parameter_value == "'c_90.000'" %}
     90
     {% else %}
     NULL
     {% endif %} ;;
   }
 
+  dimension: parameter_visible {
+    label_from_parameter: time_period
+    type: string
+    sql: {{ time_period._parameter_value }};;
+  }
 
   dimension: month_formatted {
     group_label: "Created"
@@ -121,7 +154,7 @@ view: athlete_events_extends_test {
 #       hidden: yes
     type: string
     sql: 1 ;;
-   }
+  }
 
 
 

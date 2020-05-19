@@ -22,14 +22,6 @@ explore: athlete_events {
     type: left_outer
     relationship: many_to_one
     sql_on: ${athlete_events.noc} = ${national_olympic_committees.noc};;
-#     fields: [
-#       national_olympic_committees.created_date,
-#       national_olympic_committees.full_name,
-#       national_olympic_committees.email,
-#       national_olympic_committees.age,
-#       national_olympic_committees.gender,
-#       national_olympic_committees.state_on_map
-#     ]
   }
 
   join: summer_games {                                        # Join 2
@@ -122,24 +114,19 @@ explore: presenter {
 # explore: unique_presenters {}
 explore: unique_presenters_final {}
 
+explore: currency_demo  {}
+
+
+
 explore: athlete_events_extends_test {
-#   sql_always_where:   {% if _user_attributes['first_name'] == 'Isbmail' %} 1=1 {% else %}athlete_events_extends_test.noc = 'fra'{% endif %} ;;
+#   sql_always_where:   {% if _user_attributes['first_name'] == 'Ismail' %} 1=1 {% else %}athlete_events_extends_test.noc = 'fra'{% endif %} ;;
   label: "Athlete Olympic Events Test Hub"
 #   view_label: "Athlete Olympic Events"
   case_sensitive: no
-
   join: national_olympic_committees {                         # Join 1
     type: left_outer
     relationship: many_to_one
     sql_on: ${athlete_events_extends_test.noc} = ${national_olympic_committees.noc};;
-#     fields: [
-#       national_olympic_committees.created_date,
-#       national_olympic_committees.full_name,
-#       national_olympic_committees.email,
-#       national_olympic_committees.age,
-#       national_olympic_committees.gender,
-#       national_olympic_committees.state_on_map
-#     ]
   }
 
   join: summer_games {                                        # Join 2
