@@ -57,6 +57,22 @@ view: currency_demo
            {% endif %};;
   }
 
+  measure: currency_summary {
+    type: number
+    sql:${formatted_amount};;
+    html:   {% if currency._value == 'USD' %}
+              {{ rendered_value | prepend: "$ " }}
+            {% elsif currency._value == 'EUR' %}
+              {{ rendered_value | prepend: "€ " }}
+            {% elsif currency._value =='GBP' %}
+              {{ rendered_value | prepend: "£ " }}
+            {% elsif currency._value == 'JPY' %}
+              {{ rendered_value | prepend: "¥ " }}
+            {% else %}
+              {{ rendered_value | prepend: " " | prepend: currency._value }}
+            {% endif %};;
+  }
+
   dimension: usd_amount
   {
     hidden: yes

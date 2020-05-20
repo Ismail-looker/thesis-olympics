@@ -58,6 +58,13 @@ view: national_olympic_committees {
               /dashboards/594?OlympicYear={{ _filters['athlete_events_extends_test.olympic_year'] | url_encode }}
             {% endif %}"
     }
+
+#     link: {
+#       label: "Breadcrumbs link"
+#       url:
+#       "/dashboards/594?OlympicYear={{ _filters['athlete_events.olympic_year'] | url_encode }}"
+# #       "/dashboards/594?OlympicYear={{ _filters['athlete_events_extends_test.olympic_year'] | url_encode }}"
+#     }
   }
 
   dimension: noc {

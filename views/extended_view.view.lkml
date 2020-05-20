@@ -1,7 +1,6 @@
-include: "summer_games.view"
+include: "/views/**/summer_games.view"
 view: extended_view {
-    extends: [summer_games]
-
+  extends: [summer_games]
   dimension: olympiad_host_city_label {
     description: "Host City (Label)"
     label: "New Host City (Label)"
@@ -9,7 +8,7 @@ view: extended_view {
     sql: ${TABLE}.Olympiad_HostCity ;;
   }
 
-    measure: additional_measure {
-      type: count
-    }
+  measure: additional_measure {
+    type: count
+  }
 }
