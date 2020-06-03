@@ -99,37 +99,52 @@ map_layer: body_map {
 
 #------------------------------------------- TESTING AREA----------------------------------
 explore: athlete_events_extends_test {
-#   sql_always_where:   {% if _user_attributes['first_name'] == 'Ismail' %} 1=1 {% else %}athlete_events_extends_test.noc = 'fra'{% endif %} ;;
-label: "Athlete Olympic Events Test Hub"
-#   view_label: "Athlete Olympic Events"
-case_sensitive: no
-join: national_olympic_committees {                         # Join 1
-  type: left_outer
-  relationship: many_to_one
-  sql_on: ${athlete_events_extends_test.noc} = ${national_olympic_committees.noc};;
+  #   sql_always_where:   {% if _user_attributes['first_name'] == 'Ismail' %} 1=1 {% else %}athlete_events_extends_test.noc = 'fra'{% endif %} ;;
+  # fields: [ALL_FIELDS*,-test_filter.date_filter]
+  #   view_label: "Athlete Olympic Events"
+  #   access_filter: {
+  #     field: athlete_events.athlete_id
+  #     user_attribute: id
+  #   }
+  #    always_filter: {
+  #      filters: [athlete_events.athlete_id: "{{ _user_attributes['id'] }}"]
+  #    }
+  label: "Athlete Olympic Events Test Hub"
+  case_sensitive: no
+  join: national_olympic_committees {                         # Join 1
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.noc} = ${national_olympic_committees.noc};;
+  }
+
+  join: summer_games {                                        # Join 2
+    type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.olympic_year} = ${summer_games.olympiad_year}
+      AND ${athlete_events_extends_test.olympic_season} = "Summer";;
+  }
+  join: extended_view {
+    type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.olympic_year} = ${extended_view.olympiad_year}
+      AND ${athlete_events_extends_test.olympic_season} = "Summer";;
+  }
+  join: derived_view {
+    type: inner
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.olympic_year} = ${derived_view.olympiad_year}
+      AND ${athlete_events_extends_test.olympic_season} = "Summer";;
+  }
+  join: test_filter {
+    # fields: [-test_filter.date_filter]
+    from: derived_view
+    type: inner
+    relationship: many_to_one
+    sql_on: ${athlete_events_extends_test.olympic_year} = ${test_filter.olympiad_year}
+      AND ${athlete_events_extends_test.olympic_season} = "Summer";;
+  }
 }
 
-join: summer_games {                                        # Join 2
-  type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
-  relationship: many_to_one
-  sql_on: ${athlete_events_extends_test.olympic_year} = ${summer_games.olympiad_year}
-    AND ${athlete_events_extends_test.olympic_season} = "Summer";;
-}
-join: extended_view {
-  type: inner   # Using Inner Join to avoid null values that result from Winter events when Left join is used
-  relationship: many_to_one
-  sql_on: ${athlete_events_extends_test.olympic_year} = ${extended_view.olympiad_year}
-    AND ${athlete_events_extends_test.olympic_season} = "Summer";;
-}
-join: test_filter {
-  from: derived_view
-  fields: [-test_filter.date_filter]
-  type: inner
-  relationship: many_to_one
-  sql_on: ${athlete_events_extends_test.olympic_year} = ${test_filter.olympiad_year}
-    AND ${athlete_events_extends_test.olympic_season} = "Summer";;
-}
-}
 
 # explore: testing_precision_filter_dt {}
 # explore: testing_liquid {}
@@ -146,6 +161,7 @@ explore: presenter {
 # explore: unique_presenters {}
 explore: unique_presenters_final {}
 explore: currency_demo  {}
+explore: liquid_conditional_format {}
 
 # "properties": {
 #   "Name": "Athens",

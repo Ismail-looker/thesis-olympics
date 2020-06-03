@@ -5,6 +5,23 @@ view: athlete_events {
     fields: [unique_id, athlete_id, athlete_name, noc, national_olympic_committees.iso_country, sport, olympic_event, medal]
   }
 
+
+  dimension: dummy_three {
+    case: {
+      when: {
+        label: "Number of Distinct Athletes"
+        sql: 1=1 ;;
+      }
+      when: {
+        label: "Number of Distinct Nocs"
+        sql: 1=1 ;;
+      }
+      when: {
+        label: "Number of Distinct Events"
+        sql: 1=1 ;;
+      }
+    }
+  }
   dimension: unique_id {
     description: "Unique ID"
     label: "_ID"

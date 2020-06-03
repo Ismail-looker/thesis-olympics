@@ -9,10 +9,12 @@ view: derived_view {
 
       FROM Olympics.Summer_Games
       WHERE {% condition derived_view.date_filter %} Olympiad_StartDate {% endcondition %}
+      group by 1,2,3,4
       ;;
   }
 
   filter: date_filter {
+    datatype: date # TO FIX Failed to retrieve data - No matching signature for operator >= for argument types: DATE, TIMESTAMP. Supported signatures: ANY >= ANY at [9:15]
     type: date
     default_value: ""
   }

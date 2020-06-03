@@ -226,15 +226,22 @@ view: summer_games {
     label: "
     {% if days_olympiad_duration._in_query %} Olympiad Duration in Days
     {% elsif weeks_olympiad_duration._in_query %}  Olympiad Duration in Weeks
+    {% elsif months_olympiad_duration._in_query %}  Olympiad Duration in Months
+    {% elsif quarters_olympiad_duration._in_query %}  Olympiad Duration in Quarters
     {% else %}  Olympiad Duration
     {% endif %}"
     # label: "Olympiad Duration"
     type: duration
     datatype: date
-    intervals: [day, week]
+    intervals: [day, week, month, quarter]
     sql_start: ${TABLE}.Olympiad_StartDate ;;
     sql_end: ${TABLE}.Olympiad_EndDate ;;
 
+  }
+
+  measure: coun_duration {
+    type: count_distinct
+    sql: ${quarters_olympiad_duration} ;;
   }
 
   dimension: olympiad_city_wiki_link {
