@@ -3,6 +3,7 @@ connection: "ismail_120_yrs_of_olympics_thesis"
 # include all the views
 include: "/views/**/*.view"
 # include: "/other_maps/**/*.dashboard"
+include: "/**/*.dashboard"
 
 datagroup: ismail_thesis_olympics_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;

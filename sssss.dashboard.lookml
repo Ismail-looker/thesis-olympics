@@ -59,14 +59,3 @@
     col: 0
     width: 8
     height: 6
-  filters:
-  - name: Datetime range
-    title: Datetime range
-    type: field_filter
-    default_value: 2020/04/06 to 2020/04/06
-    allow_multiple_values: true
-    required: false
-    model: 3proj_m
-    explore: order_items
-    listens_to_filters: []
-    field: order_items.returned_date
