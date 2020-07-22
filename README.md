@@ -5,7 +5,6 @@ https://batchgeo.com/
 for custom map (Olympic Cities)
 
 
-
 "Head"
 "Chest"
 "Mid_body"
