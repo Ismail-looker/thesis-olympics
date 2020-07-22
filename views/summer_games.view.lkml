@@ -8,6 +8,7 @@ view: summer_games {
     primary_key: yes
     sql: ${TABLE}.Olympiad_ID ;;
   }
+
 # Host City Label
   dimension: olympiad_host_city_label {
     description: "Host City (Label)"

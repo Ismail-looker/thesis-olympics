@@ -5,7 +5,9 @@ view: liquid_conditional_format {
             SELECT  2 as id, "[120, 300, 400]" as pattern, "[100, 120, 300, 400, 120, 300, 400]" as epoch_list, 5 as count UNION ALL
             SELECT  3 as id, "[100, 250, 300]" as pattern, "[100, 250, 300, 400]" as epoch_list, 5 as count UNION ALL
             SELECT  4 as id, "[350, 500, 600]" as pattern, "[100, 250, 300, 400]" as epoch_list, 5 as count UNION ALL
-            SELECT  5 as id, "[Hello]" as pattern, "[Hello, World]" as epoch_list, 5 as count
+            SELECT  5 as id, "[Hello]" as pattern, "[Hello, World]" as epoch_list, 5 as count UNION ALL
+            SELECT  6 as id, null as pattern, "[Hello, World]" as epoch_list, 5 as count UNION ALL
+            SELECT  7 as id, "fitbit,endomondo,googlefit" as pattern, "[Hello, World]" as epoch_list, 5 as count
       ;;
   }
 
@@ -131,7 +133,7 @@ view: liquid_conditional_format {
       required_fields: [pattern]
       html: {% assign answer = epoch_list_4._value contains 'hello' %}
 
-                         1.  {{value | remove: '['| remove: ']' | split: ', ' | join: "-" contains pattern._value | remove: '['| remove: ']' | split: ', ' | join: "-"}} 4. {{answer}};;
+                                 1.  {{value | remove: '['| remove: ']' | split: ', ' | join: "-" contains pattern._value | remove: '['| remove: ']' | split: ', ' | join: "-"}} 4. {{answer}};;
     }
     dimension: ttt {
       type: string
@@ -144,6 +146,31 @@ view: liquid_conditional_format {
               no
             {% endif %};;
     }
+
+    dimension: partner_integration {
+      type: string
+      sql:${TABLE}.epoch_list;;
+      required_fields: [pattern]
+      html: {% assign string = '[hello, world]' %}
+            {% if string contains 'hello' %}
+              {{string contains 'hello'}} string includes 'hello'
+              {% else %}
+              no
+            {% endif %};;
+    }
+
+    dimension: count_of_integration{
+      sql: coalesce(${TABLE}.pattern, "EMPTY");;
+      html: {% assign my_array = value  %}
+            {% assign my_array2 = my_array | split: "," %}
+            {% if my_array == "EMPTY" %}
+              0
+            {% else %}
+              {{ my_array2.size }}
+            {% endif %};;
+    }
+
+
 
     measure: count {
       type: sum

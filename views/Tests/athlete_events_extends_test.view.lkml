@@ -94,6 +94,19 @@ view: athlete_events_extends_test {
     html: {{rendered_value}} | {{ rendered_value | append: "-01" | date: "%b %y" }};;
   }
 
+  dimension: is_filtered {
+    sql: {% if athlete_events_extends_test.athlete_name._is_filtered %}
+          'Filtered ' {{athlete_events_extends_test.athlete_name._value}}
+          {% else %}
+          'Not Filtered'
+          {% endif %};;
+    html: {% if athlete_events_extends_test.athlete_name._is_filtered %}
+          'Filtered '{{_filters['athlete_events_extends_test.athlete_name']}}
+          {% else %}
+          'Not Filtered'
+          {% endif %};;
+  }
+
 
   dimension: falsey {
     type: string
