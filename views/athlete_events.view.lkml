@@ -6,6 +6,7 @@ view: athlete_events {
   }
 
 
+
   dimension: dummy_three {
     case: {
       when: {
