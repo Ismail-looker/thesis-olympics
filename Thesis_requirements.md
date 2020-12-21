@@ -33,7 +33,7 @@ Dashboards: &nbsp;
 Put your documentation here! Your text is rendered with [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown).
 
 Here is a roadmap of what's required for the Thesis project, and the pace at which you'll complete it.
-
+![test](https://en.wikipedia.org/wiki/Portable_Network_Graphics#/media/File:PNG_transparency_demonstration_1.png)
 Part 1:
 
 - [x] Choose Dataset

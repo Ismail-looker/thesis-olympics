@@ -37,7 +37,7 @@ view: national_olympic_committees {
     link: {
       icon_url: "https://lipis.github.io/flag-icon-css/flags/4x3/{{ iso_alpha_2._value | downcase }}.svg"
       label: "{{ iso_country._value }}"
-      url: "https://en.wikipedia.org/wiki/{{ value | encode_uri }}"
+      url: "https://en.wikipedia.org/wiki/{{ value | url_encode }}"
       # <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/aw.svg" alt="Aruba Flag">
     }
 #     link: {
@@ -50,14 +50,14 @@ view: national_olympic_committees {
 #             {% endif %}
 #             /dashboards/594?OlympicYear={{ filter_value | url_encode }}"
 #     }
-    link: {
-      label: "Breadcrumbs link"
-      url: "{% if _explore._name == 'athlete_events' %}
-              /dashboards/594?OlympicYear={{ _filters['athlete_events.olympic_year'] | url_encode }}
-            {% elsif _explore._name == 'athlete_events_extends_test' %}
-              /dashboards/594?OlympicYear={{ _filters['athlete_events_extends_test.olympic_year'] | url_encode }}
-            {% endif %}"
-    }
+#     link: {
+#       label: "Breadcrumbs link"
+#       url: "{% if _explore._name == 'athlete_events' %}
+#               /dashboards/594?OlympicYear={{ _filters['athlete_events.olympic_year'] | url_encode }}
+#             {% elsif _explore._name == 'athlete_events_extends_test' %}
+#               /dashboards/594?OlympicYear={{ _filters['athlete_events_extends_test.olympic_year'] | url_encode }}
+#             {% endif %}"
+#     }
 
 #     link: {
 #       label: "Breadcrumbs link"

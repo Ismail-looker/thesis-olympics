@@ -1,4 +1,5 @@
-- dashboard: ssssss
+- dashboard: sssp
+  preferred_viewer: dashboards-next
   title: ssssss
   layout: newspaper
   elements:

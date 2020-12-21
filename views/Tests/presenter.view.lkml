@@ -10,7 +10,8 @@ view: presenter {
             SELECT  7 as id, "D" as presenter_1, "B" as presenter_2, 5 as count  UNION ALL
             SELECT  8 as id, "E" as presenter_1, "D" as presenter_2, 5 as count  UNION ALL
             SELECT  9 as id, "E" as presenter_1, "A" as presenter_2, 5 as count  UNION ALL
-            SELECT  10 as id, "E" as presenter_1, "B" as presenter_2, 5 as count
+            SELECT  10 as id, "E" as presenter_1, "B" as presenter_2, 5 as count UNION ALL
+            SELECT  11 as id, "F" as presenter_1, "G" as presenter_2, 5 as count
      ;;
   }
 
@@ -71,6 +72,10 @@ view: unique_presenters_final {
   dimension: unique_presenter {
     type: string
     sql:${TABLE}.unique_presenter;;
+    link:{
+      label: "Link here"
+      url: "{{link}}"
+      }
   }
   dimension: presenter_count {
     type: number

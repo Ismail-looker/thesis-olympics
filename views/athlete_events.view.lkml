@@ -1,3 +1,17 @@
+test: add_a_unique_name_1598968427 {
+  explore_source: athlete_events {
+    column: athlete_name {}
+    column: test2 {}
+    column: count {
+      field: athlete_events.count
+    }
+    sorts: [athlete_events.count: asc]
+    limit: 1
+  }
+  assert: test  {
+    expression: ${athlete_events.count} = ${athlete_events.test2};;
+  }
+}
 view: athlete_events {
   sql_table_name: Olympics.athlete_events ;;
 
@@ -5,7 +19,14 @@ view: athlete_events {
     fields: [unique_id, athlete_id, athlete_name, noc, national_olympic_committees.iso_country, sport, olympic_event, medal]
   }
 
+  parameter: end_date { ### Issue with Parameter in Filter
+    type: date
+  }
 
+  dimension: test2 {
+    type: number
+    sql: 1 ;;
+  }
 
   dimension: dummy_three {
     case: {
@@ -50,6 +71,11 @@ view: athlete_events {
       icon_url: ""
     }
   }
+
+measure: test_list {
+  type: list
+  list_field: athlete_name
+}
 
   dimension: athlete_gender {
     description: "Gender of Athlete"
@@ -126,7 +152,8 @@ view: athlete_events {
     sql: ${TABLE}.Olympic_Year ;;
     full_suggestions: yes
     bypass_suggest_restrictions: yes
-    suggest_dimension: olympic_year_string
+    suggest_dimension: athlete_events.olympic_year_string
+    suggest_explore: athlete_events
   }
 
 # YEAR
@@ -190,7 +217,7 @@ view: athlete_events {
     sql: ${TABLE}.Medal ;;
   }
 
-  # YYYY-MM-DD but with MM-DD as 01-01 and only used for partitioning of BQ Table
+# YYYY-MM-DD but with MM-DD as 01-01 and only used for partitioning of BQ Table
   dimension_group: olympic_year_partition_helper {
     type: time
     timeframes: [
@@ -337,4 +364,5 @@ view: athlete_events {
     html: <a href="/explore/ismail_thesis_olympics/athlete_events?fields=athlete_events.my_drill_fields*&f[athlete_events.medal]={% parameter medals_to_count %}" target="_blank">{{ value }}</a> ;;
 
   }
+
 }

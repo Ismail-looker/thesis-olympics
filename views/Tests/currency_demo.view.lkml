@@ -9,7 +9,9 @@ view: currency_demo
       UNION ALL
       SELECT 3 as ID, 10000.00 as val, 'CHF' as currency
       UNION ALL
-      SELECT 4 as ID, 10000.00 as val, 'JPY' as currency;;
+      SELECT 4 as ID, 20000.00 as val, 'JPY' as currency
+      UNION ALL
+      SELECT 5 as ID, 10000.00 as val, 'GBP' as currency;;
   }
 
   dimension: ID
@@ -17,6 +19,7 @@ view: currency_demo
     type: number
     primary_key: yes
     sql: ${TABLE}.ID;;
+    html: <center>{{value}}</center> ;;
   }
 
   dimension: currency
@@ -35,6 +38,14 @@ view: currency_demo
           WHEN ${currency} = 'JPY' THEN '¥'
           ELSE CONCAT(${currency}, ' ')
         END;;
+  }
+
+  dimension: raw_value {
+    type: number
+#     value_format: "0.##"
+    value_format_name: decimal_2
+    order_by_field: usd_amount
+    sql: ${TABLE}.val;;
   }
 
   dimension: formatted_amount {
@@ -86,6 +97,66 @@ view: currency_demo
           WHEN ${currency} = 'CHF' THEN 1.02 * ${formatted_amount}
           ELSE NULL
         END;;
+  }
+
+  dimension: rating {
+    sql: ${TABLE}.ID  ;;
+    html: {% if value == 1 %}
+              {{ value | append: " " }}
+              <i class='fa fa-star' aria-hidden='true'></i>
+            {% elsif value == 2 %}
+              {{ rendered_value | append: " " }}
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+            {% elsif value == 3 %}
+              {{ value | append: " " }}
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+            {% elsif value == 4 %}
+              {{ value | append: " " }}
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+            {% elsif value == 5 %}
+             {{ value | append: " " }}
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+              <i class='fa fa-star' aria-hidden='true'></i>
+            {% endif %};;
+  }
+
+  dimension: rating2 {
+    sql: ${TABLE}.ID  ;;
+    html: {% if value == 1 %}
+              {{ rendered_value | append: " " }}
+                {% for i in (1..value) %}
+                  <i class='fa fa-star' aria-hidden='true'></i>
+                {% endfor %}
+            {% elsif value == 2 %}
+              {{ rendered_value | append: " " }}
+                {% for i in (1..value) %}
+                  <i class='fa fa-star' aria-hidden='true'></i>
+                {% endfor %}
+            {% elsif value == 3 %}
+              {{ rendered_value | append: " " }}
+                {% for i in (1..value) %}
+                  <i class='fa fa-star' aria-hidden='true'></i>
+                {% endfor %}
+            {% elsif value == 4 %}
+              {{ rendered_value | append: " " }}
+                {% for i in (1..value) %}
+                  <i class='fa fa-star' aria-hidden='true'></i>
+                {% endfor %}
+            {% elsif value == 5 %}
+              {{ rendered_value | append: " " }}
+                {% for i in (1..value) %}
+                  <i class='fa fa-star' aria-hidden='true'></i>
+                {% endfor %}
+            {% endif %};;
   }
 
   measure: count {

@@ -10,3 +10,7 @@ project_name: "ismail_thesis_olympics"
 constant: flag_url_prefix {
   value: "https://lipis.github.io/flag-icon-css/flags/4x3/"
 }
+
+constant: param_default {
+  value: "{{_user_attributes['first_name']}}"
+}
