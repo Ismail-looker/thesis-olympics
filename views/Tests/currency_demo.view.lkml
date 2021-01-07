@@ -49,9 +49,9 @@ view: currency_demo
   }
 
   dimension: formatted_amount {
-    type: number
+    type: string
 #     value_format: "0.##"
-    value_format_name: decimal_2
+    # value_format_name: decimal_2
     order_by_field: usd_amount
     sql: ${TABLE}.val;;
 #         {{ currency_symbol._value }}{{ rendered_value }};; # html
@@ -63,9 +63,9 @@ view: currency_demo
               {{ rendered_value | prepend: "£ " }}
             {% elsif currency._value == 'JPY' %}
               {{ rendered_value | prepend: "¥ " }}
-           {% else %}
-             {{ rendered_value | prepend: " " | prepend: currency._value }}
-           {% endif %};;
+          {% else %}
+            {{ rendered_value | prepend: " " | prepend: currency._value }}
+          {% endif %};;
   }
 
   measure: currency_summary {
